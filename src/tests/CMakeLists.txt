@@ -162,7 +162,7 @@ if (ENABLE_CUDA)
 	add_definitions(-DCUDA_BLOCKS_TEST=1)
 endif(ENABLE_CUDA)
 
-add_definitions(-DTEST_PATH="${CMAKE_SOURCE_DIR}/src/tests/")
+add_definitions(-DTEST_PATH="./tests/")
 
 
 add_executable(run_tests ${CMAKE_CURRENT_SOURCE_DIR}/test_main.cc)
