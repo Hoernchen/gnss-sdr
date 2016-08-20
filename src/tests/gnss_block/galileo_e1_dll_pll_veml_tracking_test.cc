@@ -152,7 +152,7 @@ TEST_F(GalileoE1DllPllVemlTrackingInternalTest, ConnectAndRun)
         end = tv.tv_sec *1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
 
-    std::cout <<  "Processed " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Processed " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
 }
 
 
@@ -216,5 +216,5 @@ TEST_F(GalileoE1DllPllVemlTrackingInternalTest, ValidationOfResults)
         end = tv.tv_sec *1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
 
-    std::cout <<  "Tracked " << num_samples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Tracked " << num_samples << " samples in " << (end - begin) << " microseconds" << std::endl;
 }

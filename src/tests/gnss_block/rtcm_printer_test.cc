@@ -64,7 +64,7 @@ TEST(Rtcm_Printer_Test, Run)
     //    catch (std::exception& e)
     //    {
     //            //LOG(WARNING) << e.what() << "File: " << file_name;
-    //            //std::cout << "File not found" << std::endl;
+    //            //LOG(ERROR) << "File not found" << std::endl;
     //    }
 
     std::string filename = "test.rtcm";

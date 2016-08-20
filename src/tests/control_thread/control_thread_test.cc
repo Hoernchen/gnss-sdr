@@ -95,11 +95,11 @@ TEST(Control_Thread_Test, InstantiateRunControlMessages)
     }
     catch( boost::exception & e )
     {
-            std::cout << "Boost exception: " << boost::diagnostic_information(e);
+            LOG(ERROR) << "Boost exception: " << boost::diagnostic_information(e);
     }
     catch(std::exception const&  ex)
     {
-            std::cout  << "STD exception: " << ex.what();
+            LOG(ERROR)  << "STD exception: " << ex.what();
     }
 
     unsigned int expected3 = 3;
@@ -161,11 +161,11 @@ TEST(Control_Thread_Test, InstantiateRunControlMessages2)
     }
     catch( boost::exception & e )
     {
-            std::cout << "Boost exception: " << boost::diagnostic_information(e);
+            LOG(ERROR) << "Boost exception: " << boost::diagnostic_information(e);
     }
     catch(std::exception const&  ex)
     {
-            std::cout  << "STD exception: " << ex.what();
+            LOG(ERROR)  << "STD exception: " << ex.what();
     }
 
     unsigned int expected5 = 5;

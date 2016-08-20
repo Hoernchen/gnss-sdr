@@ -598,7 +598,7 @@ void Rinex_Printer::update_nav_header(std::fstream& out, const Galileo_Iono& gal
     out.close();
     out.open(navGalfilename, std::ios::out | std::ios::app);
     out.seekp(pos);
-    std::cout << "The RINEX Navigation file header has been updated with UTC and IONO info." << std::endl;
+    LOG(ERROR) << "The RINEX Navigation file header has been updated with UTC and IONO info." << std::endl;
 }
 
 
@@ -750,7 +750,7 @@ void Rinex_Printer::update_nav_header(std::fstream& out, const Gps_Utc_Model& ut
     out.close();
     out.open(navfilename, std::ios::out | std::ios::app);
     out.seekp(pos);
-    std::cout << "The RINEX Navigation file header has been updated with UTC and IONO info." << std::endl;
+    LOG(ERROR) << "The RINEX Navigation file header has been updated with UTC and IONO info." << std::endl;
 }
 
 
@@ -1060,7 +1060,7 @@ void Rinex_Printer::update_nav_header(std::fstream& out, const Gps_Iono& gps_ion
     out.close();
     out.open(navMixfilename, std::ios::out | std::ios::app);
     out.seekp(pos);
-    std::cout << "The RINEX Navigation file header has been updated with UTC and IONO info." << std::endl;
+    LOG(ERROR) << "The RINEX Navigation file header has been updated with UTC and IONO info." << std::endl;
 }
 
 
@@ -3178,10 +3178,10 @@ void Rinex_Printer::to_date_time(int gps_week, int gps_tow, int &year, int &mont
             else
                 {
                     year = y;
-                    //std::cout << "year: year=" << year << " secs_in_year_y="<< secs_in_year_y << " remaining_secs="<< remaining_secs << std::endl;
+                    //LOG(ERROR) << "year: year=" << year << " secs_in_year_y="<< secs_in_year_y << " remaining_secs="<< remaining_secs << std::endl;
                     break;
                 }
-            //std::cout << "year: y=" << y << " secs_in_year_y="<< secs_in_year_y << " remaining_secs="<< remaining_secs << std::endl;
+            //LOG(ERROR) << "year: y=" << y << " secs_in_year_y="<< secs_in_year_y << " remaining_secs="<< remaining_secs << std::endl;
         }
 
     // find month
@@ -3200,10 +3200,10 @@ void Rinex_Printer::to_date_time(int gps_week, int gps_tow, int &year, int &mont
             else
                 {
                     month = m;
-                    //std::cout << "month: month=" << month << " secs_in_month_m="<< secs_in_month_m << " remaining_secs="<< remaining_secs << std::endl;
+                    //LOG(ERROR) << "month: month=" << month << " secs_in_month_m="<< secs_in_month_m << " remaining_secs="<< remaining_secs << std::endl;
                     break;
                 }
-            //std::cout << "month: m=" << m << " secs_in_month_m="<< secs_in_month_m << " remaining_secs="<< remaining_secs << std::endl;
+            //LOG(ERROR) << "month: m=" << m << " secs_in_month_m="<< secs_in_month_m << " remaining_secs="<< remaining_secs << std::endl;
         }
 
     day = remaining_secs/secs_per_day+1;

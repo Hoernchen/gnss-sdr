@@ -74,7 +74,7 @@ Rtcm::~Rtcm()
 // *****************************************************************************************************
 void Rtcm::run_server()
 {
-    std::cout << "Starting a TCP Server on port " << RTCM_port << std::endl;
+    LOG(ERROR) << "Starting a TCP Server on port " << RTCM_port << std::endl;
     try
     {
             std::thread tq([&]{ std::make_shared<Queue_Reader>(io_service, rtcm_message_queue, RTCM_port)->do_read_queue(); });
@@ -99,7 +99,7 @@ void Rtcm::stop_service()
 
 void Rtcm::stop_server()
 {
-    std::cout << "Stopping TCP Server on port " << RTCM_port << std::endl;
+    LOG(ERROR) << "Stopping TCP Server on port " << RTCM_port << std::endl;
     rtcm_message_queue->push("Goodbye"); // this terminates tq
     Rtcm::stop_service();
     servers.front().close_server();
@@ -2588,7 +2588,7 @@ unsigned int Rtcm::lock_time(const Gps_Ephemeris & eph, double obs_time, const G
     boost::posix_time::time_duration lock_duration = current_time - Rtcm::gps_L1_last_lock_time[65 - gnss_synchro.PRN];
     lock_time_in_seconds = static_cast<unsigned int>(lock_duration.total_seconds());
     // Debug:
-    // std::cout << "lock time PRN " << gnss_synchro.PRN << ": " << lock_time_in_seconds <<  "  current time: " << current_time << std::endl;
+    // LOG(ERROR) << "lock time PRN " << gnss_synchro.PRN << ": " << lock_time_in_seconds <<  "  current time: " << current_time << std::endl;
     return lock_time_in_seconds;
 }
 

@@ -79,35 +79,35 @@ OsmosdrSignalSource::OsmosdrSignalSource(ConfigurationInterface* configuration,
             {
                     if (!osmosdr_args_.empty())
                         {
-                        std::cout << "OsmoSdr arguments: " << osmosdr_args_ << std::endl;
+                        LOG(ERROR) << "OsmoSdr arguments: " << osmosdr_args_ << std::endl;
                         LOG(INFO) << "OsmoSdr arguments: " << osmosdr_args_;
                         }
                     osmosdr_source_ = osmosdr::source::make(osmosdr_args_);
             }
             catch( boost::exception & e )
             {
-                    DLOG(FATAL) << "Boost exception: " << boost::diagnostic_information(e);
+                    DLOG(ERROR) << "Boost exception: " << boost::diagnostic_information(e);
             }
 
             // 2 set sampling rate
             osmosdr_source_->set_sample_rate(sample_rate_);
-            std::cout << boost::format("Actual RX Rate: %f [SPS]...") % (osmosdr_source_->get_sample_rate()) << std::endl ;
+            LOG(ERROR) << boost::format("Actual RX Rate: %f [SPS]...") % (osmosdr_source_->get_sample_rate()) << std::endl ;
             LOG(INFO) << boost::format("Actual RX Rate: %f [SPS]...") % (osmosdr_source_->get_sample_rate());
 
             // 3. set rx frequency
             osmosdr_source_->set_center_freq(freq_);
-            std::cout << boost::format("Actual RX Freq: %f [Hz]...") % (osmosdr_source_->get_center_freq()) << std::endl ;
+            LOG(ERROR) << boost::format("Actual RX Freq: %f [Hz]...") % (osmosdr_source_->get_center_freq()) << std::endl ;
             LOG(INFO) << boost::format("Actual RX Freq: %f [Hz]...") % (osmosdr_source_->get_center_freq());
 
             // TODO: Assign the remnant IF from the PLL tune error
-            std::cout << boost::format("PLL Frequency tune error %f [Hz]...") % (osmosdr_source_->get_center_freq() - freq_) ;
+            LOG(ERROR) << boost::format("PLL Frequency tune error %f [Hz]...") % (osmosdr_source_->get_center_freq() - freq_) ;
             LOG(INFO) <<  boost::format("PLL Frequency tune error %f [Hz]...") % (osmosdr_source_->get_center_freq() - freq_) ;
 
             // 4. set rx gain
             if (this->AGC_enabled_ == true)
                 {
                     osmosdr_source_->set_gain_mode(true);
-                    std::cout << "AGC enabled" << std::endl;
+                    LOG(ERROR) << "AGC enabled" << std::endl;
                     LOG(INFO) << "AGC enabled";
                 }
             else
@@ -116,7 +116,7 @@ OsmosdrSignalSource::OsmosdrSignalSource(ConfigurationInterface* configuration,
                     osmosdr_source_->set_gain(gain_, 0);
                     osmosdr_source_->set_if_gain(rf_gain_, 0);
                     osmosdr_source_->set_bb_gain(if_gain_, 0);
-                    std::cout << boost::format("Actual RX Gain: %f dB...") % osmosdr_source_->get_gain() << std::endl;
+                    LOG(ERROR) << boost::format("Actual RX Gain: %f dB...") % osmosdr_source_->get_gain() << std::endl;
                     LOG(INFO) << boost::format("Actual RX Gain: %f dB...") % osmosdr_source_->get_gain();
                 }
         }

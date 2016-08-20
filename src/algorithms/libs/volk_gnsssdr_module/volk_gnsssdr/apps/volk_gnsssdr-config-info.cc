@@ -57,33 +57,33 @@ main(int argc, char **argv)
   }
 
   if(vm.size() == 0 || vm.count("help")) {
-    std::cout << desc << std::endl;
+    LOG(ERROR) << desc << std::endl;
     return 1;
   }
 
   if(vm.count("prefix"))
-    std::cout << volk_gnsssdr_prefix() << std::endl;
+    LOG(ERROR) << volk_gnsssdr_prefix() << std::endl;
 
   if(vm.count("version"))
-    std::cout << volk_gnsssdr_version() << std::endl;
+    LOG(ERROR) << volk_gnsssdr_version() << std::endl;
 
   if(vm.count("cc"))
-    std::cout << volk_gnsssdr_c_compiler() << std::endl;
+    LOG(ERROR) << volk_gnsssdr_c_compiler() << std::endl;
 
   if(vm.count("cflags"))
-    std::cout << volk_gnsssdr_compiler_flags() << std::endl;
+    LOG(ERROR) << volk_gnsssdr_compiler_flags() << std::endl;
 
   // stick an extra ';' to make output of this and avail-machines the
   // same structure for easier parsing
   if(vm.count("all-machines"))
-    std::cout << volk_gnsssdr_available_machines() << ";" << std::endl;
+    LOG(ERROR) << volk_gnsssdr_available_machines() << ";" << std::endl;
 
   if(vm.count("avail-machines")) {
     volk_gnsssdr_list_machines();
   }
 
   if(vm.count("machine")) {
-    std::cout << volk_gnsssdr_get_machine() << std::endl;
+    LOG(ERROR) << volk_gnsssdr_get_machine() << std::endl;
   }
 
   if(vm.count("alignment")) {

@@ -56,7 +56,7 @@ TEST(Conjugate_Test, StandardCComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Conjugate of a " << FLAGS_size_conjugate_test
+    LOG(ERROR) << "Conjugate of a " << FLAGS_size_conjugate_test
               << "-length complex float vector in standard C finished in " << (end - begin)
               << " microseconds" << std::endl;
 
@@ -81,7 +81,7 @@ TEST(Conjugate_Test, C11ComplexImplementation)
         }
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Conjugate of a " << FLAGS_size_conjugate_test
+    LOG(ERROR) << "Conjugate of a " << FLAGS_size_conjugate_test
               << " complex<float> vector (C++11-style) finished in " << (end - begin)
               << " microseconds" << std::endl;
     ASSERT_LE(0, end - begin);
@@ -109,7 +109,7 @@ TEST(Conjugate_Test, ArmadilloComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Conjugate of a " << FLAGS_size_conjugate_test
+    LOG(ERROR) << "Conjugate of a " << FLAGS_size_conjugate_test
               << "-length complex float Armadillo vector finished in " << (end - begin)
               << " microseconds" << std::endl;
     ASSERT_LE(0, end - begin);
@@ -130,7 +130,7 @@ TEST(Conjugate_Test, VolkComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Conjugate of a "<< FLAGS_size_conjugate_test
+    LOG(ERROR) << "Conjugate of a "<< FLAGS_size_conjugate_test
               << "-length complex float vector using VOLK finished in " << (end - begin)
               << " microseconds" << std::endl;
     ASSERT_LE(0, end - begin);

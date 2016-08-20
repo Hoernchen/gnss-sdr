@@ -648,7 +648,7 @@ std::unique_ptr<GNSSBlockInterface> GNSSBlockFactory::GetBlock(
 
             catch (const std::exception &e)
             {
-                    std::cout << "GNSS-SDR program ended." << std::endl;
+                    LOG(ERROR) << "GNSS-SDR program ended." << std::endl;
                     exit(1);
             }
         }
@@ -663,7 +663,7 @@ std::unique_ptr<GNSSBlockInterface> GNSSBlockFactory::GetBlock(
             }
             catch (const std::exception &e)
             {
-                    std::cout << "GNSS-SDR program ended." << std::endl;
+                    LOG(ERROR) << "GNSS-SDR program ended." << std::endl;
                     exit(1);
             }
         }
@@ -679,7 +679,7 @@ std::unique_ptr<GNSSBlockInterface> GNSSBlockFactory::GetBlock(
             }
             catch (const std::exception &e)
             {
-                    std::cout << "GNSS-SDR program ended." << std::endl;
+                    LOG(ERROR) << "GNSS-SDR program ended." << std::endl;
                     exit(1);
             }
         }
@@ -693,7 +693,7 @@ std::unique_ptr<GNSSBlockInterface> GNSSBlockFactory::GetBlock(
             }
             catch(const std::exception &e)
             {
-                std::cout << "GNSS-SDR program ended." << std::endl;
+                LOG(ERROR) << "GNSS-SDR program ended." << std::endl;
                 exit(1);
             }
         }
@@ -709,7 +709,7 @@ std::unique_ptr<GNSSBlockInterface> GNSSBlockFactory::GetBlock(
             }
             catch (const std::exception &e)
             {
-                    std::cout << "GNSS-SDR program ended." << std::endl;
+                    LOG(ERROR) << "GNSS-SDR program ended." << std::endl;
                     exit(1);
             }
         }
@@ -724,7 +724,7 @@ std::unique_ptr<GNSSBlockInterface> GNSSBlockFactory::GetBlock(
             }
             catch (const std::exception &e)
             {
-                    std::cout << "GNSS-SDR program ended." << std::endl;
+                    LOG(ERROR) << "GNSS-SDR program ended." << std::endl;
                     exit(1);
             }
         }

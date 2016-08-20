@@ -164,7 +164,7 @@ bool hybrid_ls_pvt::get_PVT(std::map<int,Gnss_Synchro> gnss_pseudoranges_map, do
 
             else if(gnss_pseudoranges_iter->second.System == 'G')
                 {
-                    //std::cout << "Satellite System: " << gnss_pseudoranges_iter->second.System <<std::endl;
+                    //LOG(ERROR) << "Satellite System: " << gnss_pseudoranges_iter->second.System <<std::endl;
                     // 1 GPS - find the ephemeris for the current GPS SV observation. The SV PRN ID is the map key
                     gps_ephemeris_iter = gps_ephemeris_map.find(gnss_pseudoranges_iter->second.PRN);
                     if (gps_ephemeris_iter != gps_ephemeris_map.end())

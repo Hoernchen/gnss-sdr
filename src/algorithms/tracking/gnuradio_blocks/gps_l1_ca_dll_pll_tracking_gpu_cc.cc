@@ -257,7 +257,7 @@ void Gps_L1_Ca_Dll_Pll_Tracking_GPU_cc::start_tracking()
     sys = sys_.substr(0,1);
 
     // DEBUG OUTPUT
-    std::cout << "Tracking start on channel " << d_channel << " for satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << std::endl;
+    LOG(ERROR) << "Tracking start on channel " << d_channel << " for satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << std::endl;
     LOG(INFO) << "Starting tracking of satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << " on channel " << d_channel;
 
 
@@ -339,7 +339,7 @@ int Gps_L1_Ca_Dll_Pll_Tracking_GPU_cc::general_work (int noutput_items __attribu
                     static_cast<float>(d_rem_code_phase_chips),
                     d_correlation_length_samples, d_n_correlator_taps);
             cudaProfilerStop();
-            //std::cout<<"c_out[0]="<<d_correlator_outs[0]<<"c_out[1]="<<d_correlator_outs[1]<<"c_out[2]="<<d_correlator_outs[2]<<std::endl;
+            //LOG(ERROR)<<"c_out[0]="<<d_correlator_outs[0]<<"c_out[1]="<<d_correlator_outs[1]<<"c_out[2]="<<d_correlator_outs[2]<<std::endl;
 
             // UPDATE INTEGRATION TIME
             CURRENT_INTEGRATION_TIME_S = static_cast<double>(d_correlation_length_samples) / static_cast<double>(d_fs_in);
@@ -426,7 +426,7 @@ int Gps_L1_Ca_Dll_Pll_Tracking_GPU_cc::general_work (int noutput_items __attribu
                         }
                     if (d_carrier_lock_fail_counter > MAXIMUM_LOCK_FAIL_COUNTER)
                         {
-                            std::cout << "Loss of lock in channel " << d_channel << "!" << std::endl;
+                            LOG(ERROR) << "Loss of lock in channel " << d_channel << "!" << std::endl;
                             LOG(INFO) << "Loss of lock in channel " << d_channel << "!";
                             this->message_port_pub(pmt::mp("events"), pmt::from_long(3));//3 -> loss of lock
                             d_carrier_lock_fail_counter = 0;

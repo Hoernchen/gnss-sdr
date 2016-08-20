@@ -116,7 +116,7 @@ int main(int argc, char *argv[]) {
 
     /** --help option */
     if ( vm.count("help") ) {
-      std::cout << "The VOLK_GNSSSDR profiler." << std::endl
+      LOG(ERROR) << "The VOLK_GNSSSDR profiler." << std::endl
                 << desc << std::endl;
       return 0;
     }
@@ -218,7 +218,7 @@ int main(int argc, char *argv[]) {
         else write_results(&results, false);
     }
     else {
-        std::cout << "Warning: this was a dry-run. Config not generated" << std::endl;
+        LOG(ERROR) << "Warning: this was a dry-run. Config not generated" << std::endl;
     }
 }
 
@@ -294,23 +294,23 @@ void write_results(const std::vector<volk_gnsssdr_test_results_t> *results, bool
     // do not overwrite volk_gnsssdr_config when using a regex.
     if (not fs::exists(config_path.branch_path()))
     {
-        std::cout << "Creating " << config_path.branch_path() << "..." << std::endl;
+        LOG(ERROR) << "Creating " << config_path.branch_path() << "..." << std::endl;
         fs::create_directories(config_path.branch_path());
     }
 
     std::ofstream config;
     if(update_result) {
-        std::cout << "Updating " << config_path << "..." << std::endl;
+        LOG(ERROR) << "Updating " << config_path << "..." << std::endl;
         config.open(config_path.string().c_str(), std::ofstream::app);
         if (!config.is_open()) { //either we don't have write access or we don't have the dir yet
-            std::cout << "Error opening file " << config_path << std::endl;
+            LOG(ERROR) << "Error opening file " << config_path << std::endl;
         }
     }
     else {
-        std::cout << "Writing " << config_path << "..." << std::endl;
+        LOG(ERROR) << "Writing " << config_path << "..." << std::endl;
         config.open(config_path.string().c_str());
         if (!config.is_open()) { //either we don't have write access or we don't have the dir yet
-            std::cout << "Error opening file " << config_path << std::endl;
+            LOG(ERROR) << "Error opening file " << config_path << std::endl;
         }
 
         config << "\

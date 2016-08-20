@@ -78,5 +78,5 @@ TEST(Direct_Resampler_Conditioner_Cc_Test, InstantiationAndRunTest)
         top_block->stop();
     }) << "Failure running direct_resampler_conditioner.";
 
-    std::cout <<  "Resampled " << nsamples << " samples in " << (end-begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Resampled " << nsamples << " samples in " << (end-begin) << " microseconds" << std::endl;
 }

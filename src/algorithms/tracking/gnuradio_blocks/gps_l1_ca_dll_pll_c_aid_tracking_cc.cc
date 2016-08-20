@@ -287,7 +287,7 @@ void gps_l1_ca_dll_pll_c_aid_tracking_cc::start_tracking()
     sys = sys_.substr(0,1);
 
     // DEBUG OUTPUT
-    std::cout << "Tracking start on channel " << d_channel << " for satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << std::endl;
+    LOG(ERROR) << "Tracking start on channel " << d_channel << " for satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << std::endl;
     LOG(INFO) << "Starting tracking of satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << " on channel " << d_channel;
 
     // enable tracking
@@ -383,7 +383,7 @@ int gps_l1_ca_dll_pll_c_aid_tracking_cc::general_work (int noutput_items __attri
                         {
                             // compute coherent integration and enable tracking loop
                             // perform coherent integration using correlator output history
-                            //std::cout<<"##### RESET COHERENT INTEGRATION ####"<<std::endl;
+                            //LOG(ERROR)<<"##### RESET COHERENT INTEGRATION ####"<<std::endl;
                             d_correlator_outs[0] = gr_complex(0.0,0.0);
                             d_correlator_outs[1] = gr_complex(0.0,0.0);
                             d_correlator_outs[2] = gr_complex(0.0,0.0);
@@ -399,7 +399,7 @@ int gps_l1_ca_dll_pll_c_aid_tracking_cc::general_work (int noutput_items __attri
                                     d_code_loop_filter.set_DLL_BW(d_dll_bw_narrow_hz);
                                     d_carrier_loop_filter.set_params(10.0, d_pll_bw_narrow_hz,2);
                                     d_preamble_synchronized = true;
-                                    std::cout << "Enabled "<<d_extend_correlation_ms<<" [ms] extended correlator for CH "<< d_channel <<" : Satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN)
+                                    LOG(ERROR) << "Enabled "<<d_extend_correlation_ms<<" [ms] extended correlator for CH "<< d_channel <<" : Satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN)
                                               <<" pll_bw = " << d_pll_bw_hz << " [Hz], pll_narrow_bw = " << d_pll_bw_narrow_hz << " [Hz]" << std::endl
                                               <<" dll_bw = " << d_dll_bw_hz << " [Hz], dll_narrow_bw = " << d_dll_bw_narrow_hz << " [Hz]" << std::endl;
                                 }
@@ -543,7 +543,7 @@ int gps_l1_ca_dll_pll_c_aid_tracking_cc::general_work (int noutput_items __attri
                                 }
                             if (d_carrier_lock_fail_counter > MAXIMUM_LOCK_FAIL_COUNTER)
                                 {
-                                    std::cout << "Loss of lock in channel " << d_channel << "!" << std::endl;
+                                    LOG(ERROR) << "Loss of lock in channel " << d_channel << "!" << std::endl;
                                     LOG(INFO) << "Loss of lock in channel " << d_channel << "!";
                                     this->message_port_pub(pmt::mp("events"), pmt::from_long(3));//3 -> loss of lock
                                     d_carrier_lock_fail_counter = 0;

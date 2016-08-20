@@ -553,7 +553,7 @@ Viterbi_Decoder::Prev::~Prev()
             delete[] bit;
             delete[] metric;
             delete refcount;
-            //std::cout << "~Prev(" << "?" << ", " << t << ")" << " destructor with delete" << std::endl;
+            //LOG(ERROR) << "~Prev(" << "?" << ", " << t << ")" << " destructor with delete" << std::endl;
         }
     else
         {
@@ -566,14 +566,14 @@ Viterbi_Decoder::Prev::~Prev()
 
 int Viterbi_Decoder::Prev::get_anchestor_state_of_current_state(int current_state)
 {
-    //std::cout << "get prev state: for state " << current_state << " at time " << t << ", the prev state at time " << t-1 << " is " << state[current_state] << std::endl;
+    //LOG(ERROR) << "get prev state: for state " << current_state << " at time " << t << ", the prev state at time " << t-1 << " is " << state[current_state] << std::endl;
     if (num_states > current_state)
         {
             return state[current_state];
         }
     else
         {
-            //std::cout<<"alarm "<<"num_states="<<num_states<<" current_state="<<current_state<<std::endl;
+            //LOG(ERROR)<<"alarm "<<"num_states="<<num_states<<" current_state="<<current_state<<std::endl;
             //return state[current_state];
             return 0;
         }
@@ -583,7 +583,7 @@ int Viterbi_Decoder::Prev::get_anchestor_state_of_current_state(int current_stat
 
 int Viterbi_Decoder::Prev::get_bit_of_current_state(int current_state)
 {
-    //std::cout << "get prev bit  : for state " << current_state << " at time " << t << ", the send bit is " << bit[current_state] << std::endl;
+    //LOG(ERROR) << "get prev bit  : for state " << current_state << " at time " << t << ", the send bit is " << bit[current_state] << std::endl;
     if (num_states > current_state)
         {
             return bit[current_state];

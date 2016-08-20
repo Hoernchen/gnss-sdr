@@ -55,7 +55,7 @@ TEST(MagnitudeSquared_Test, StandardCComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "The squared magnitude of a " << FLAGS_size_magnitude_test
+    LOG(ERROR) << "The squared magnitude of a " << FLAGS_size_magnitude_test
               << "-length vector in standard C computed in " << (end - begin)
               << " microseconds" << std::endl;
     delete[] input;
@@ -79,7 +79,7 @@ TEST(MagnitudeSquared_Test, C11ComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "The squared magnitude of a " << FLAGS_size_magnitude_test
+    LOG(ERROR) << "The squared magnitude of a " << FLAGS_size_magnitude_test
               << " complex<float> vector (C++11-style) finished in " << (end - begin)
               << " microseconds" << std::endl;
     ASSERT_LE(0, end - begin);
@@ -106,7 +106,7 @@ TEST(MagnitudeSquared_Test, ArmadilloComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout <<  "The squared magnitude of a " << FLAGS_size_magnitude_test
+    LOG(ERROR) <<  "The squared magnitude of a " << FLAGS_size_magnitude_test
               << "-length vector using Armadillo computed in " << (end - begin)
               << " microseconds" << std::endl;
     ASSERT_LE(0, end - begin);
@@ -127,7 +127,7 @@ TEST(MagnitudeSquared_Test, VolkComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout <<  "The squared magnitude of a " << FLAGS_size_magnitude_test
+    LOG(ERROR) <<  "The squared magnitude of a " << FLAGS_size_magnitude_test
               << "-length vector using VOLK computed in " << (end - begin)
               << " microseconds" << std::endl;
     volk_free(input);

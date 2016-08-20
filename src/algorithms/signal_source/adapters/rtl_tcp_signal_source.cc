@@ -80,13 +80,13 @@ RtlTcpSignalSource::RtlTcpSignalSource(ConfigurationInterface* configuration,
             // 1. Make the gr block
             try
             {
-                    std::cout << "Connecting to " << address_ << ":" << port_ << std::endl;
+                    LOG(ERROR) << "Connecting to " << address_ << ":" << port_ << std::endl;
                     LOG (INFO) << "Connecting to " << address_ << ":" << port_;
                     signal_source_ = rtl_tcp_make_signal_source_c (address_, port_, flip_iq_);
             }
             catch( boost::exception & e )
             {
-                    DLOG(FATAL) << "Boost exception: " << boost::diagnostic_information(e);
+                    DLOG(ERROR) << "Boost exception: " << boost::diagnostic_information(e);
             }
 
             // 2 set sampling rate
@@ -100,21 +100,21 @@ RtlTcpSignalSource::RtlTcpSignalSource(ConfigurationInterface* configuration,
 
             if (this->AGC_enabled_ == true)
                 {
-                    std::cout << "AGC enabled" << std::endl;
+                    LOG(ERROR) << "AGC enabled" << std::endl;
                     LOG(INFO) << "AGC enabled";
                     signal_source_->set_agc_mode(true);
                 }
             else
                 {
-                    std::cout << "AGC disabled" << std::endl;
+                    LOG(ERROR) << "AGC disabled" << std::endl;
                     LOG(INFO) << "AGC disabled";
                     signal_source_->set_agc_mode(false);
 
-                    std::cout << "Setting gain to " << gain_ << std::endl;
+                    LOG(ERROR) << "Setting gain to " << gain_ << std::endl;
                     LOG(INFO) << "Setting gain to " << gain_;
                     signal_source_->set_gain(gain_);
 
-                    std::cout << "Setting IF gain to " << if_gain_ << std::endl;
+                    LOG(ERROR) << "Setting IF gain to " << if_gain_ << std::endl;
                     LOG(INFO) << "Setting IF gain to " << if_gain_;
                     signal_source_->set_if_gain(if_gain_);
                 }

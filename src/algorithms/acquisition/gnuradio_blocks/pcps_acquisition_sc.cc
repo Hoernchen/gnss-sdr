@@ -375,7 +375,7 @@ int pcps_acquisition_sc::general_work(int noutput_items,
 
                                     // 5- Compute the test statistics and compare to the threshold
                                     d_test_statistics = d_mag / d_input_power;
-                                    //std::cout<<"d_input_power="<<d_input_power<<" d_test_statistics="<<d_test_statistics<<" d_gnss_synchro->Acq_doppler_hz ="<<d_gnss_synchro->Acq_doppler_hz <<std::endl;
+                                    //LOG(ERROR)<<"d_input_power="<<d_input_power<<" d_test_statistics="<<d_test_statistics<<" d_gnss_synchro->Acq_doppler_hz ="<<d_gnss_synchro->Acq_doppler_hz <<std::endl;
 
                                 }
                         }

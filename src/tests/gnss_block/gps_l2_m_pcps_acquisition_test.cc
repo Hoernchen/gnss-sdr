@@ -198,7 +198,7 @@ TEST_F(GpsL2MPcpsAcquisitionTest, ConnectAndRun)
         end = tv.tv_sec * 1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
 
-    std::cout <<  "Processed " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Processed " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
 }
 
 TEST_F(GpsL2MPcpsAcquisitionTest, ValidationOfResults)
@@ -270,10 +270,10 @@ TEST_F(GpsL2MPcpsAcquisitionTest, ValidationOfResults)
     }) << "Failure running the top_block." << std::endl;
 
     //unsigned long int Acq_samplestamp_samples = gnss_synchro.Acq_samplestamp_samples;
-    std::cout <<  "Acquisition process runtime duration: " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Acquisition process runtime duration: " << (end - begin) << " microseconds" << std::endl;
 
-    std::cout <<  "gnss_synchro.Acq_doppler_hz = " << gnss_synchro.Acq_doppler_hz << " Hz" << std::endl;
-    std::cout <<  "gnss_synchro.Acq_delay_samples = " << gnss_synchro.Acq_delay_samples << " Samples" << std::endl;
+    LOG(ERROR) <<  "gnss_synchro.Acq_doppler_hz = " << gnss_synchro.Acq_doppler_hz << " Hz" << std::endl;
+    LOG(ERROR) <<  "gnss_synchro.Acq_delay_samples = " << gnss_synchro.Acq_delay_samples << " Samples" << std::endl;
 
     ASSERT_EQ(1, msg_rx->rx_message) << "Acquisition failure. Expected message: 1=ACQ SUCCESS.";
 

@@ -224,11 +224,11 @@ void galileo_e1b_telemetry_decoder_cc::decode_word(double *page_part_symbols,int
             if(d_nav.flag_CRC_test == true)
                 {
                     LOG(INFO) << "Galileo CRC correct on channel " << d_channel << " from satellite " << d_satellite;
-                    std::cout << "Galileo CRC correct on channel " << d_channel << " from satellite " << d_satellite << std::endl;
+                    LOG(ERROR) << "Galileo CRC correct on channel " << d_channel << " from satellite " << d_satellite << std::endl;
                 }
             else
                 {
-                    std::cout << "Galileo CRC error on channel " << d_channel <<  " from satellite " << d_satellite << std::endl;
+                    LOG(ERROR) << "Galileo CRC error on channel " << d_channel <<  " from satellite " << d_satellite << std::endl;
                     LOG(INFO) << "Galileo CRC error on channel " << d_channel <<  " from satellite " << d_satellite;
                 }
             flag_even_word_arrived = 0;
@@ -266,7 +266,7 @@ void galileo_e1b_telemetry_decoder_cc::decode_word(double *page_part_symbols,int
             std::shared_ptr<Galileo_Almanac> tmp_obj= std::make_shared<Galileo_Almanac>(d_nav.get_almanac());
             this->message_port_pub(pmt::mp("telemetry"), pmt::make_any(tmp_obj));
             //debug
-            std::cout << "Galileo almanac received!" << std::endl;
+            LOG(ERROR) << "Galileo almanac received!" << std::endl;
             LOG(INFO) << "GPS_to_Galileo time conversion:";
             LOG(INFO) << "A0G=" << tmp_obj->A_0G_10;
             LOG(INFO) << "A1G=" << tmp_obj->A_1G_10;
@@ -410,7 +410,7 @@ int galileo_e1b_telemetry_decoder_cc::general_work (int noutput_items __attribut
             Prn_timestamp_at_preamble_ms = in[0][0].Tracking_timestamp_secs * 1000.0;
             if(d_nav.flag_TOW_5 == true) //page 5 arrived and decoded, so we are in the odd page (since Tow refers to the even page, we have to add 1 sec)
                 {
-                    //std::cout<< "Using TOW_5 for timestamping" << std::endl;
+                    //LOG(ERROR)<< "Using TOW_5 for timestamping" << std::endl;
                     d_TOW_at_Preamble = d_nav.TOW_5 + GALILEO_INAV_PAGE_PART_SECONDS; //TOW_5 refers to the even preamble, but when we decode it we are in the odd part, so 1 second later
                     /* 1  sec (GALILEO_INAV_PAGE_PART_SYMBOLS*GALILEO_E1_CODE_PERIOD) is added because
                      * if we have a TOW value it means that we are at the beginning of the last page part
@@ -421,7 +421,7 @@ int galileo_e1b_telemetry_decoder_cc::general_work (int noutput_items __attribut
 
             else if(d_nav.flag_TOW_6 == true) //page 6 arrived and decoded, so we are in the odd page (since Tow refers to the even page, we have to add 1 sec)
                 {
-                    //std::cout<< "Using TOW_6 for timestamping" << std::endl;
+                    //LOG(ERROR)<< "Using TOW_6 for timestamping" << std::endl;
                     d_TOW_at_Preamble = d_nav.TOW_6 + GALILEO_INAV_PAGE_PART_SECONDS;
                     //TOW_6 refers to the even preamble, but when we decode it we are in the odd part, so 1 second later
                     /* 1  sec (GALILEO_INAV_PAGE_PART_SYMBOLS*GALILEO_E1_CODE_PERIOD) is added because
@@ -491,7 +491,7 @@ int galileo_e1b_telemetry_decoder_cc::general_work (int noutput_items __attribut
             d_average_count = 0;
             //3. Make the output (copy the object contents to the GNURadio reserved memory)
             *out[0] = current_synchro_data;
-            //std::cout<<"GPS L1 TLM output on CH="<<this->d_channel << " SAMPLE STAMP="<<d_sample_counter/d_decimation_output_factor<<std::endl;
+            //LOG(ERROR)<<"GPS L1 TLM output on CH="<<this->d_channel << " SAMPLE STAMP="<<d_sample_counter/d_decimation_output_factor<<std::endl;
             return 1;
         }
     else

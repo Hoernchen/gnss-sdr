@@ -211,7 +211,7 @@ void Gps_L1_Ca_Tcp_Connector_Tracking_cc::start_tracking()
     //        acq_trk_diff_samples = d_sample_counter - d_acq_sample_stamp;//-d_vector_length;
     //    }
     acq_trk_diff_samples = (long int)d_sample_counter - (long int)d_acq_sample_stamp;
-    std::cout << "acq_trk_diff_samples=" << acq_trk_diff_samples << std::endl;
+    LOG(ERROR) << "acq_trk_diff_samples=" << acq_trk_diff_samples << std::endl;
     acq_trk_diff_seconds = (float)acq_trk_diff_samples / (float)d_fs_in;
     //doppler effect
     // Fd=(C/(C+Vr))*F
@@ -268,7 +268,7 @@ void Gps_L1_Ca_Tcp_Connector_Tracking_cc::start_tracking()
     sys = sys_.substr(0,1);
 
     // DEBUG OUTPUT
-    std::cout << "Tracking start on channel " << d_channel << " for satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << std::endl;
+    LOG(ERROR) << "Tracking start on channel " << d_channel << " for satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << std::endl;
     LOG(INFO) << "Starting tracking of satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << " on channel " << d_channel;
 
     // enable tracking
@@ -437,7 +437,7 @@ int Gps_L1_Ca_Tcp_Connector_Tracking_cc::general_work (int noutput_items __attri
                         }
                     if (d_carrier_lock_fail_counter > MAXIMUM_LOCK_FAIL_COUNTER)
                         {
-                            std::cout << "Loss of lock in channel " << d_channel << "!" << std::endl;
+                            LOG(ERROR) << "Loss of lock in channel " << d_channel << "!" << std::endl;
                             LOG(INFO) << "Loss of lock in channel " << d_channel << "!";
                             this->message_port_pub(pmt::mp("events"), pmt::from_long(3));//3 -> loss of lock
                             d_carrier_lock_fail_counter = 0;

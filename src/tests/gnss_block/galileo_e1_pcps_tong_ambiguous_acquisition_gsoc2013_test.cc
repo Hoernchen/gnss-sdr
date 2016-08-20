@@ -396,7 +396,7 @@ void GalileoE1PcpsTongAmbiguousAcquisitionGSoC2013Test::process_message()
 
     realization_counter++;
 
-    std::cout << "Progress: " << round((float)realization_counter/num_of_realizations*100) << "% \r" << std::flush;
+    LOG(ERROR) << "Progress: " << round((float)realization_counter/num_of_realizations*100) << "% \r" << std::flush;
 
     if (realization_counter == num_of_realizations)
         {
@@ -412,7 +412,7 @@ void GalileoE1PcpsTongAmbiguousAcquisitionGSoC2013Test::process_message()
             stop_queue();
             top_block->stop();
 
-            std::cout << std::endl;
+            LOG(ERROR) << std::endl;
         }
 }
 
@@ -456,7 +456,7 @@ TEST_F(GalileoE1PcpsTongAmbiguousAcquisitionGSoC2013Test, ConnectAndRun)
         end = tv.tv_sec * 1e6 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
 
-    std::cout <<  "Processed " << nsamples << " samples in " << (end-begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Processed " << nsamples << " samples in " << (end-begin) << " microseconds" << std::endl;
 }
 
 TEST_F(GalileoE1PcpsTongAmbiguousAcquisitionGSoC2013Test, ValidationOfResults)
@@ -541,8 +541,8 @@ TEST_F(GalileoE1PcpsTongAmbiguousAcquisitionGSoC2013Test, ValidationOfResults)
                 EXPECT_EQ(2, message) << "Acquisition failure. Expected message: 2=ACQ FAIL.";
             }
 
-            //std::cout << "Delay: " << gnss_synchro.Acq_delay_samples << std::endl;
-            //std::cout << "Doppler: " << gnss_synchro.Acq_doppler_hz << std::endl;
+            //LOG(ERROR) << "Delay: " << gnss_synchro.Acq_delay_samples << std::endl;
+            //LOG(ERROR) << "Doppler: " << gnss_synchro.Acq_doppler_hz << std::endl;
             ch_thread.join();
         }
 }
@@ -592,7 +592,7 @@ TEST_F(GalileoE1PcpsTongAmbiguousAcquisitionGSoC2013Test, ValidationOfResultsPro
         top_block->msg_connect(acquisition->get_right_block(), pmt::mp("events"), msg_rx, pmt::mp("events"));
     }) << "Failure connecting the blocks of acquisition test." << std::endl;
 
-    std::cout << "Probability of false alarm (target) = " << 0.1 << std::endl;
+    LOG(ERROR) << "Probability of false alarm (target) = " << 0.1 << std::endl;
 
     // i = 0 --> satellite in acquisition is visible (prob of detection and prob of detection with wrong estimation)
     // i = 1 --> satellite in acquisition is not visible (prob of false detection)
@@ -621,14 +621,14 @@ TEST_F(GalileoE1PcpsTongAmbiguousAcquisitionGSoC2013Test, ValidationOfResultsPro
 
             if (i == 0)
             {
-                std::cout << "Estimated probability of detection = " << Pd << std::endl;
-                std::cout << "Estimated probability of false alarm (satellite present) = " << Pfa_p << std::endl;
-                std::cout << "Mean acq time = " << mean_acq_time_us << " microseconds." << std::endl;
+                LOG(ERROR) << "Estimated probability of detection = " << Pd << std::endl;
+                LOG(ERROR) << "Estimated probability of false alarm (satellite present) = " << Pfa_p << std::endl;
+                LOG(ERROR) << "Mean acq time = " << mean_acq_time_us << " microseconds." << std::endl;
             }
             else if (i == 1)
             {
-                std::cout << "Estimated probability of false alarm (satellite absent) = " << Pfa_a << std::endl;
-                std::cout << "Mean acq time = " << mean_acq_time_us << " microseconds." << std::endl;
+                LOG(ERROR) << "Estimated probability of false alarm (satellite absent) = " << Pfa_a << std::endl;
+                LOG(ERROR) << "Mean acq time = " << mean_acq_time_us << " microseconds." << std::endl;
             }
             ch_thread.join();
         }

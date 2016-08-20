@@ -32,7 +32,7 @@
 #ifndef GNSS_SDR_RTCM_H_
 #define GNSS_SDR_RTCM_H_
 
-
+#include <glog/logging.h>
 #include <bitset>
 #include <deque>
 #include <map>
@@ -516,17 +516,17 @@ private:
                             {
                                 if(first == true)
                                     {
-                                        std::cout << "Client from " << socket_.remote_endpoint().address() << " says ";
+                                        LOG(ERROR) << "Client from " << socket_.remote_endpoint().address() << " says ";
                                         first = false;
                                     }
-                                std::cout << client_says.substr(0, 80) << std::endl;
+                                LOG(ERROR) << client_says.substr(0, 80) << std::endl;
                                 client_says = client_says.substr(80, client_says.length() - 80);
                             }
                         do_read_message_header();
                     }
                 else
                     {
-                        std::cout << "Closing connection with client from " << socket_.remote_endpoint().address() << std::endl;
+                        LOG(ERROR) << "Closing connection with client from " << socket_.remote_endpoint().address() << std::endl;
                         room_.leave(shared_from_this());
                     }
                     });
@@ -542,14 +542,14 @@ private:
                 if (!ec)
                     {
                         room_.deliver(read_msg_);
-                        //std::cout << "Delivered message (session): ";
-                        //std::cout.write(read_msg_.body(), read_msg_.body_length());
-                        //std::cout << std::endl;
+                        //LOG(ERROR) << "Delivered message (session): ";
+                        //LOG(ERROR).write(read_msg_.body(), read_msg_.body_length());
+                        //LOG(ERROR) << std::endl;
                         do_read_message_header();
                     }
                 else
                     {
-                        std::cout << "Closing connection with client from " << socket_.remote_endpoint().address() << std::endl;
+                        LOG(ERROR) << "Closing connection with client from " << socket_.remote_endpoint().address() << std::endl;
                         room_.leave(shared_from_this());
                     }
                     });
@@ -572,7 +572,7 @@ private:
                     }
                 else
                     {
-                        std::cout << "Closing connection with client from " << socket_.remote_endpoint().address() << std::endl;
+                        LOG(ERROR) << "Closing connection with client from " << socket_.remote_endpoint().address() << std::endl;
                         room_.leave(shared_from_this());
                     }
                             });
@@ -628,7 +628,7 @@ private:
                     }
                 else
                     {
-                        std::cout << "Server is down." << std::endl;
+                        LOG(ERROR) << "Server is down." << std::endl;
                     }
                     });
         }
@@ -645,7 +645,7 @@ private:
                     }
                 else
                     {
-                        std::cout << "Error in client" << std::endl;
+                        LOG(ERROR) << "Error in client" << std::endl;
                         socket_.close();
                     }
                     });
@@ -741,19 +741,19 @@ private:
                     {
                         if(first_client)
                             {
-                                std::cout << "The TCP Server is up and running. Accepting connections ..." << std::endl;
+                                LOG(ERROR) << "The TCP Server is up and running. Accepting connections ..." << std::endl;
                                 first_client = false;
                             }
                         else
                             {
-                                std::cout << "Starting RTCM TCP server session..." << std::endl;
-                                std::cout << "Serving client from " << socket_.remote_endpoint().address() << std::endl;
+                                LOG(ERROR) << "Starting RTCM TCP server session..." << std::endl;
+                                LOG(ERROR) << "Serving client from " << socket_.remote_endpoint().address() << std::endl;
                             }
                         std::make_shared<Rtcm_Session>(std::move(socket_), room_)->start();
                     }
                 else
                     {
-                        std::cout << "Error when invoking a RTCM session. " << ec << std::endl;
+                        LOG(ERROR) << "Error when invoking a RTCM session. " << ec << std::endl;
                     }
                 do_accept();
                     });

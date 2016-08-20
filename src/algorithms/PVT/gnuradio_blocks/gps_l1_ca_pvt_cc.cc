@@ -299,12 +299,12 @@ bool pseudoranges_pairCompare_min(const std::pair<int,Gnss_Synchro>& a, const st
 
 void gps_l1_ca_pvt_cc::print_receiver_status(Gnss_Synchro** channels_synchronization_data)
 {
-    // Print the current receiver status using std::cout every second
+    // Print the current receiver status using LOG(ERROR) every second
     int current_rx_seg = floor(channels_synchronization_data[0][0].Tracking_timestamp_secs);
     if ( current_rx_seg!= d_last_status_print_seg)
         {
             d_last_status_print_seg = current_rx_seg;
-            std::cout << "Current input signal time = " << current_rx_seg << " [s]" << std::endl << std::flush;
+            LOG(ERROR) << "Current input signal time = " << current_rx_seg << " [s]" << std::endl << std::flush;
             //DLOG(INFO) << "GPS L1 C/A Tracking CH " << d_channel <<  ": Satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN)
             //          << ", CN0 = " << d_CN0_SNV_dB_Hz << " [dB-Hz]" << std::endl;
         }
@@ -427,7 +427,7 @@ int gps_l1_ca_pvt_cc::general_work (int noutput_items __attribute__((unused)), g
             // DEBUG MESSAGE: Display position in console output
             if (((d_sample_counter % d_display_rate_ms) == 0) and d_ls_pvt->b_valid_position == true)
                 {
-                    std::cout << "Position at " << boost::posix_time::to_simple_string(d_ls_pvt->d_position_UTC_time)
+                    LOG(ERROR) << "Position at " << boost::posix_time::to_simple_string(d_ls_pvt->d_position_UTC_time)
                               << " UTC is Lat = " << d_ls_pvt->d_latitude_d << " [deg], Long = " << d_ls_pvt->d_longitude_d
                               << " [deg], Height= " << d_ls_pvt->d_height_m << " [m]" << std::endl;
 

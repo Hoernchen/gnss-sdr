@@ -203,6 +203,6 @@ TEST_F(GpsL2MDllPllTrackingTest, ValidationOfResults)
     }) << "Failure running the top_block." << std::endl;
 
     // TODO: Verify tracking results
-    std::cout <<  "Tracked " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Tracked " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
 }
 

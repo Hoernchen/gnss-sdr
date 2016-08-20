@@ -29,7 +29,7 @@ m * \file gps_navigation_message.cc
  *
  * -------------------------------------------------------------------------
  */
-
+#include <glog/logging.h>
 #include "gps_navigation_message.h"
 #include <cmath>
 #include <iostream>
@@ -156,9 +156,9 @@ Gps_Navigation_Message::Gps_Navigation_Message()
 
 void Gps_Navigation_Message::print_gps_word_bytes(unsigned int GPS_word)
 {
-    std::cout << " Word =";
-    std::cout << std::bitset<32>(GPS_word);
-    std::cout << std::endl;
+    LOG(ERROR) << " Word =";
+    LOG(ERROR) << std::bitset<32>(GPS_word);
+    LOG(ERROR) << std::endl;
 }
 
 

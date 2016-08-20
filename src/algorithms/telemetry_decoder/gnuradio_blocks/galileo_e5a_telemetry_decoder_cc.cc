@@ -159,11 +159,11 @@ void galileo_e5a_telemetry_decoder_cc::decode_word(double *page_symbols,int fram
     if(d_nav.flag_CRC_test == true)
         {
             LOG(INFO) << "Galileo CRC correct on channel " << d_channel << " from satellite " << d_satellite;
-            std::cout << "Galileo CRC correct on channel " << d_channel << " from satellite " << d_satellite << std::endl;
+            LOG(ERROR) << "Galileo CRC correct on channel " << d_channel << " from satellite " << d_satellite << std::endl;
         }
     else
         {
-            std::cout << "Galileo CRC error on channel " << d_channel << " from satellite " << d_satellite << std::endl;
+            LOG(ERROR) << "Galileo CRC error on channel " << d_channel << " from satellite " << d_satellite << std::endl;
             LOG(INFO)<< "Galileo CRC error on channel " << d_channel << " from satellite " << d_satellite;
         }
 

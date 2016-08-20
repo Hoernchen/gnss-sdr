@@ -201,10 +201,10 @@ void GNSSFlowgraph::connect()
                     if(sig_source_.at(i)->implementation().compare("Raw_Array_Signal_Source") == 0)
                         {
                             //Multichannel Array
-                            std::cout << "ARRAY MODE" << std::endl;
+                            LOG(ERROR) << "ARRAY MODE" << std::endl;
                             for (int j = 0; j < GNSS_SDR_ARRAY_SIGNAL_CONDITIONER_CHANNELS; j++)
                                 {
-                                    std::cout << "connecting ch " << j << std::endl;
+                                    LOG(ERROR) << "connecting ch " << j << std::endl;
                                     top_block_->connect(sig_source_.at(i)->get_right_block(), j, sig_conditioner_.at(i)->get_left_block(), j);
                                 }
                         }
@@ -476,13 +476,13 @@ void GNSSFlowgraph::init()
         {
             for (int i = 0; i < sources_count_; i++)
                 {
-                    std::cout << "Creating source " << i << std::endl;
+                    LOG(ERROR) << "Creating source " << i << std::endl;
                     sig_source_.push_back(block_factory_->GetSignalSource(configuration_, queue_, i));
                     //TODO: Create a class interface for SignalSources, derived from GNSSBlockInterface.
                     //Include GetRFChannels in the interface to avoid read config parameters here
                     //read the number of RF channels for each front-end
                     RF_Channels = configuration_->property(sig_source_.at(i)->role() + ".RF_channels", 1);
-                    std::cout << "RF Channels " << RF_Channels << std::endl;
+                    LOG(ERROR) << "RF Channels " << RF_Channels << std::endl;
                     for (int j = 0; j < RF_Channels; j++)
                         {
                             sig_conditioner_.push_back(block_factory_->GetSignalConditioner(configuration_, signal_conditioner_ID));
@@ -723,7 +723,7 @@ void GNSSFlowgraph::set_signals_list()
     //    for (available_gnss_list_iter = available_GNSS_signals_.begin(); available_gnss_list_iter
     //    != available_GNSS_signals_.end(); available_gnss_list_iter++)
     //        {
-    //            std::cout << *available_gnss_list_iter << std::endl;
+    //            LOG(ERROR) << *available_gnss_list_iter << std::endl;
     //        }
 }
 

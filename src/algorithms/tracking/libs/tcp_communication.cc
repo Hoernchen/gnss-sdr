@@ -28,7 +28,7 @@
  *
  * -------------------------------------------------------------------------
  */
-
+#include <glog/logging.h>
 #include "tcp_packet_data.h"
 #include "tcp_communication.h"
 #include <iostream>
@@ -54,7 +54,7 @@ int tcp_communication::listen_tcp_connection(size_t d_port_, size_t d_port_ch0_)
 
             if (d_port_ == d_port_ch0_)
                 {
-                    std::cout << "Server ready. Listening for TCP connections..." << std::endl;
+                    LOG(ERROR) << "Server ready. Listening for TCP connections..." << std::endl;
                 }
 
             // Reuse the IP address for each connection
@@ -64,7 +64,7 @@ int tcp_communication::listen_tcp_connection(size_t d_port_, size_t d_port_ch0_)
             acceptor.listen(12);
             acceptor.accept(tcp_socket_);
 
-            std::cout << "Socket accepted on port " << d_port_ << std::endl;
+            LOG(ERROR) << "Socket accepted on port " << d_port_ << std::endl;
     }
 
     catch(std::exception& e)
@@ -150,6 +150,6 @@ void tcp_communication::close_tcp_connection(size_t d_port_)
 {
     // Close the TCP connection
     tcp_socket_.close();
-    std::cout << "Socket closed on port " << d_port_ << std::endl;
+    LOG(ERROR) << "Socket closed on port " << d_port_ << std::endl;
     return;
 }

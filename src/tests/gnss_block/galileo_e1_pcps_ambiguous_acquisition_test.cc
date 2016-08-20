@@ -190,7 +190,7 @@ TEST_F(GalileoE1PcpsAmbiguousAcquisitionTest, ConnectAndRun)
         gettimeofday(&tv, NULL);
         end = tv.tv_sec*1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
-    std::cout <<  "Processed " << nsamples << " samples in " << (end-begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Processed " << nsamples << " samples in " << (end-begin) << " microseconds" << std::endl;
 }
 
 
@@ -254,11 +254,11 @@ TEST_F(GalileoE1PcpsAmbiguousAcquisitionTest, ValidationOfResults)
     }) << "Failure running the top_block." << std::endl;
 
     unsigned long int nsamples = gnss_synchro.Acq_samplestamp_samples;
-    std::cout <<  "Acquired " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Acquired " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
     ASSERT_EQ(1, msg_rx->rx_message) << "Acquisition failure. Expected message: 1=ACQ SUCCESS.";
 
-    std::cout << "Delay: " << gnss_synchro.Acq_delay_samples << std::endl;
-    std::cout << "Doppler: " << gnss_synchro.Acq_doppler_hz << std::endl;
+    LOG(ERROR) << "Delay: " << gnss_synchro.Acq_delay_samples << std::endl;
+    LOG(ERROR) << "Doppler: " << gnss_synchro.Acq_doppler_hz << std::endl;
 
     double delay_error_samples = std::abs(expected_delay_samples - gnss_synchro.Acq_delay_samples);
     float delay_error_chips = (float)(delay_error_samples * 1023 / 4000000);

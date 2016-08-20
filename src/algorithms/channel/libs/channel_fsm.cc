@@ -64,7 +64,7 @@ public:
     typedef sc::transition<Ev_channel_start_acquisition, channel_acquiring_fsm_S1> reactions;
     channel_idle_fsm_S0(my_context ctx) : my_base(ctx)
     {
-        //std::cout << "Enter Channel_Idle_S0 " << std::endl;
+        //LOG(ERROR) << "Enter Channel_Idle_S0 " << std::endl;
     }
 };
 
@@ -78,12 +78,12 @@ public:
 
     channel_acquiring_fsm_S1(my_context ctx) : my_base(ctx)
     {
-        //std::cout << "Enter Channel_Acq_S1 " << std::endl;
+        //LOG(ERROR) << "Enter Channel_Acq_S1 " << std::endl;
         context<ChannelFsm> ().start_acquisition();
     }
     ~channel_acquiring_fsm_S1()
     {
-        //std::cout << "Exit Channel_Acq_S1 " << std::endl;
+        //LOG(ERROR) << "Exit Channel_Acq_S1 " << std::endl;
     }
 };
 
@@ -96,13 +96,13 @@ public:
 
     channel_tracking_fsm_S2(my_context ctx) : my_base(ctx)
     {
-       //std::cout << "Enter Channel_tracking_S2 " << std::endl;
+       //LOG(ERROR) << "Enter Channel_tracking_S2 " << std::endl;
         context<ChannelFsm> ().start_tracking();
     }
 
     ~channel_tracking_fsm_S2()
     {
-        //std::cout << "Exit Channel_tracking_S2 " << std::endl;
+        //LOG(ERROR) << "Exit Channel_tracking_S2 " << std::endl;
         context<ChannelFsm> ().notify_stop_tracking();
     }
 
@@ -118,7 +118,7 @@ public:
     channel_waiting_fsm_S3(my_context ctx) :
         my_base(ctx)
     {
-        //std::cout << "Enter Channel_waiting_S3 " << std::endl;
+        //LOG(ERROR) << "Enter Channel_waiting_S3 " << std::endl;
         context<ChannelFsm> ().request_satellite();
     }
    // ~channel_waiting_fsm_S3(){}
@@ -149,7 +149,7 @@ ChannelFsm::ChannelFsm(std::shared_ptr<AcquisitionInterface> acquisition) :
 void ChannelFsm::Event_start_acquisition()
 {
     this->process_event(Ev_channel_start_acquisition());
-    //std::cout<<"Ev_channel_start_acquisition launched"<<std::endl;
+    //LOG(ERROR)<<"Ev_channel_start_acquisition launched"<<std::endl;
 }
 
 

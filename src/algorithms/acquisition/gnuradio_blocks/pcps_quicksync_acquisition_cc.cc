@@ -270,7 +270,7 @@ int pcps_quicksync_acquisition_cc::general_work(int noutput_items,
      */
     //DLOG(INFO) << "START GENERAL WORK";
     int acquisition_message = -1; //0=STOP_CHANNEL 1=ACQ_SUCCEES 2=ACQ_FAIL
-    //std::cout<<"general_work in quicksync gnuradio block"<<std::endl;
+    //LOG(ERROR)<<"general_work in quicksync gnuradio block"<<std::endl;
     switch (d_state)
     {
     case 0:

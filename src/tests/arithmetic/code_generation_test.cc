@@ -57,7 +57,7 @@ TEST(CodeGenGPSL1_Test, CodeGeneration)
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
     ASSERT_LE(0, end - begin);
-    std::cout << "Generation completed in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) << "Generation completed in " << (end - begin) << " microseconds" << std::endl;
     
 
 
@@ -71,11 +71,11 @@ TEST(CodeGenGPSL1_Test, CodeGeneration)
 
     gettimeofday(&tv, NULL);
     long long int end2 = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Generation 2 completed in " << (end2 - begin2) << " microseconds" << std::endl;
+    LOG(ERROR) << "Generation 2 completed in " << (end2 - begin2) << " microseconds" << std::endl;
 
     for (int j=0; j<1023;j++)
         {
-            if(_dest[j] != _dest2[j]) std::cout << "Error!" << std::endl;
+            if(_dest[j] != _dest2[j]) LOG(ERROR) << "Error!" << std::endl;
         }
     delete _dest2; */
 }
@@ -108,7 +108,7 @@ TEST(CodeGenGPSL1Sampled_Test, CodeGeneration)
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
     delete[] _dest;
     ASSERT_LE(0, end - begin);
-    std::cout << "Generation completed in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) << "Generation completed in " << (end - begin) << " microseconds" << std::endl;
 
 
     /* std::complex<float>* _dest2 = new std::complex<float>[_samplesPerCode];
@@ -122,11 +122,11 @@ TEST(CodeGenGPSL1Sampled_Test, CodeGeneration)
 
     gettimeofday(&tv, NULL);
     long long int end2 = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Generation completed in " << (end2 - begin2) << " microseconds  (New)" << std::endl;
+    LOG(ERROR) << "Generation completed in " << (end2 - begin2) << " microseconds  (New)" << std::endl;
 
     for (int j=0; j<_samplesPerCode;j++)
         {
-            if(_dest[j] != _dest2[j]) std::cout << "Error!" << std::endl;
+            if(_dest[j] != _dest2[j]) LOG(ERROR) << "Error!" << std::endl;
         }
     delete[] _dest2; */
 }
@@ -156,7 +156,7 @@ TEST(ComplexCarrier_Test, CodeGeneration)
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
     delete[] _dest; 
     ASSERT_LE(0, end - begin);
-    std::cout << "Carrier generation completed in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) << "Carrier generation completed in " << (end - begin) << " microseconds" << std::endl;
     
     /* std::complex<float>* _dest2 = new std::complex<float>[_samplesPerCode];
     gettimeofday(&tv, NULL);
@@ -169,14 +169,14 @@ TEST(ComplexCarrier_Test, CodeGeneration)
 
     gettimeofday(&tv, NULL);
     long long int end2 = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Carrier generation completed in " << (end2 - begin2) << " microseconds  (New)" << std::endl;
+    LOG(ERROR) << "Carrier generation completed in " << (end2 - begin2) << " microseconds  (New)" << std::endl;
 
     for (int j=0; j<_samplesPerCode;j++)
         {
-            if(std::abs(_dest[j] - _dest2[j]) > 0.1) std::cout << "Error!" << std::endl;
+            if(std::abs(_dest[j] - _dest2[j]) > 0.1) LOG(ERROR) << "Error!" << std::endl;
         }
 
-    std::cout << _dest[10] << "and " << _dest2[10] << std::endl;
+    LOG(ERROR) << _dest[10] << "and " << _dest2[10] << std::endl;
     delete[] _dest2;*/
 
 }

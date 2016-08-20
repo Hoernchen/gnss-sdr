@@ -199,11 +199,11 @@ FileSignalSource::FileSignalSource(ConfigurationInterface* configuration,
                 }
             else
                 {
-                    std::cout << "file_signal_source: Unable to open the samples file " << filename_.c_str() << std::endl;
+                    LOG(ERROR) << "file_signal_source: Unable to open the samples file " << filename_.c_str() << std::endl;
                     LOG(ERROR) << "file_signal_source: Unable to open the samples file " << filename_.c_str();
                 }
-            std::cout << std::setprecision(16);
-            std::cout << "Processing file " << filename_ << ", which contains " << static_cast<double>(size) << " [bytes]" << std::endl;
+            LOG(ERROR) << std::setprecision(16);
+            LOG(ERROR) << "Processing file " << filename_ << ", which contains " << static_cast<double>(size) << " [bytes]" << std::endl;
 
             if (size > 0)
                 {
@@ -223,7 +223,7 @@ FileSignalSource::FileSignalSource(ConfigurationInterface* configuration,
     }
 
     DLOG(INFO) << "Total number samples to be processed= " << samples_ << " GNSS signal duration= " << signal_duration_s << " [s]";
-    std::cout << "GNSS signal recorded time to be processed: " << signal_duration_s << " [s]" << std::endl;
+    LOG(ERROR) << "GNSS signal recorded time to be processed: " << signal_duration_s << " [s]" << std::endl;
 
     valve_ = gnss_sdr_make_valve(item_size_, samples_, queue_);
     DLOG(INFO) << "valve(" << valve_->unique_id() << ")";

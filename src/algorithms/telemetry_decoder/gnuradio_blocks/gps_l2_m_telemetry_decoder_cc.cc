@@ -191,7 +191,7 @@ int gps_l2_m_telemetry_decoder_cc::general_work (int noutput_items __attribute__
                                         {
                                             tmp_msg = valid_msgs.at(i).second;
                                             d_CNAV_Message.decode_page(tmp_msg);
-                                            std::cout << "Valid CNAV frame with relative preamble start at " << valid_msgs.at(i).first << std::endl;
+                                            LOG(ERROR) << "Valid CNAV frame with relative preamble start at " << valid_msgs.at(i).first << std::endl;
                                             flag_new_cnav_frame = true;
                                             d_flag_valid_word = true;
                                             last_frame_preamble_start = valid_msgs.at(i).first;
@@ -200,14 +200,14 @@ int gps_l2_m_telemetry_decoder_cc::general_work (int noutput_items __attribute__
                                                 {
                                                     // get ephemeris object for this SV
                                                     std::shared_ptr<Gps_CNAV_Ephemeris> tmp_obj= std::make_shared<Gps_CNAV_Ephemeris>(d_CNAV_Message.get_ephemeris());
-                                                    std::cout << "New GPS CNAV Ephemeris received for SV " << tmp_obj->i_satellite_PRN << std::endl;
+                                                    LOG(ERROR) << "New GPS CNAV Ephemeris received for SV " << tmp_obj->i_satellite_PRN << std::endl;
                                                     this->message_port_pub(pmt::mp("telemetry"), pmt::make_any(tmp_obj));
 
                                                 }
                                             if (d_CNAV_Message.have_new_iono() == true)
                                                 {
                                                     std::shared_ptr<Gps_CNAV_Iono> tmp_obj= std::make_shared<Gps_CNAV_Iono>(d_CNAV_Message.get_iono());
-                                                    std::cout << "New GPS CNAV IONO model received for SV " << d_satellite.get_PRN() << std::endl;
+                                                    LOG(ERROR) << "New GPS CNAV IONO model received for SV " << d_satellite.get_PRN() << std::endl;
                                                     this->message_port_pub(pmt::mp("telemetry"), pmt::make_any(tmp_obj));
                                                 }
                                         }
@@ -265,7 +265,7 @@ int gps_l2_m_telemetry_decoder_cc::general_work (int noutput_items __attribute__
             d_average_count = 0;
             //3. Make the output (copy the object contents to the GNURadio reserved memory)
             out[0] = current_synchro_data;
-            //std::cout<<"GPS L2 TLM output on CH="<<this->d_channel << " SAMPLE STAMP="<<d_sample_counter/d_decimation_output_factor<<std::endl;
+            //LOG(ERROR)<<"GPS L2 TLM output on CH="<<this->d_channel << " SAMPLE STAMP="<<d_sample_counter/d_decimation_output_factor<<std::endl;
             return 1;
         }
     else
@@ -451,7 +451,7 @@ void gps_l2_m_telemetry_decoder_cc::crc_verifier::get_valid_frames(const std::ve
             if (crc == 0)
                 {
                     valid_msgs.push_back(msg_candiate_int_t(candidate_it->first, candidate_it->second));
-                    std::cout << "Valid CNAV message found!"<<std::endl;
+                    LOG(ERROR) << "Valid CNAV message found!"<<std::endl;
                 }
         }
 }

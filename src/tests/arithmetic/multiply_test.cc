@@ -56,7 +56,7 @@ TEST(Multiply_Test, StandardCDoubleImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Element-wise multiplication of " << FLAGS_size_multiply_test
+    LOG(ERROR) << "Element-wise multiplication of " << FLAGS_size_multiply_test
               << " doubles in standard C finished in " << (end - begin)
               << " microseconds" << std::endl;
 
@@ -86,7 +86,7 @@ TEST(Multiply_Test, ArmadilloImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Element-wise multiplication of " << FLAGS_size_multiply_test
+    LOG(ERROR) << "Element-wise multiplication of " << FLAGS_size_multiply_test
               << "-length double Armadillo vectors finished in " << (end - begin)
               << " microseconds" << std::endl;
     ASSERT_LE(0, end - begin);
@@ -111,7 +111,7 @@ TEST(Multiply_Test, StandardCComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Element-wise multiplication of " << FLAGS_size_multiply_test
+    LOG(ERROR) << "Element-wise multiplication of " << FLAGS_size_multiply_test
               << " complex<float> in standard C finished in " << (end - begin)
               << " microseconds" << std::endl;
 
@@ -146,7 +146,7 @@ TEST(Multiply_Test, C11ComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Element-wise multiplication of " << FLAGS_size_multiply_test
+    LOG(ERROR) << "Element-wise multiplication of " << FLAGS_size_multiply_test
               << " complex<float> vector (C++11-style) finished in " << (end - begin)
               << " microseconds" << std::endl;
     ASSERT_LE(0, end - begin);
@@ -170,7 +170,7 @@ TEST(Multiply_Test, ArmadilloComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Element-wise multiplication of " << FLAGS_size_multiply_test
+    LOG(ERROR) << "Element-wise multiplication of " << FLAGS_size_multiply_test
               << "-length complex float Armadillo vectors finished in " << (end - begin)
               << " microseconds" << std::endl;
     ASSERT_LE(0, end - begin);
@@ -194,7 +194,7 @@ TEST(Multiply_Test, VolkComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Element-wise multiplication of " << FLAGS_size_multiply_test
+    LOG(ERROR) << "Element-wise multiplication of " << FLAGS_size_multiply_test
               << "-length complex float vector using VOLK finished in " << (end - begin)
               << " microseconds" << std::endl;
     ASSERT_LE(0, end - begin);

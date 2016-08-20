@@ -30,6 +30,7 @@
  * -------------------------------------------------------------------------
  */
 
+#include <glog/logging.h>
 #include "gps_cnav_navigation_message.h"
 #include <iostream>
 #include "gnss_satellite.h"
@@ -73,9 +74,9 @@ Gps_CNAV_Navigation_Message::Gps_CNAV_Navigation_Message()
 
 void Gps_CNAV_Navigation_Message::print_gps_word_bytes(unsigned int GPS_word)
 {
-    std::cout << " Word =";
-    std::cout << std::bitset<32>(GPS_word);
-    std::cout << std::endl;
+    LOG(ERROR) << " Word =";
+    LOG(ERROR) << std::bitset<32>(GPS_word);
+    LOG(ERROR) << std::endl;
 }
 
 
@@ -188,7 +189,7 @@ void Gps_CNAV_Navigation_Message::decode_page(std::vector<int> data)
     }
     catch(std::exception &e)
     {
-            std::cout << "Exception converting to bitset " << e.what() << std::endl;
+            LOG(ERROR) << "Exception converting to bitset " << e.what() << std::endl;
             return;
     }
 
@@ -210,7 +211,7 @@ void Gps_CNAV_Navigation_Message::decode_page(std::vector<int> data)
 
     page_type = static_cast<int>(read_navigation_unsigned(data_bits, CNAV_MSG_TYPE));
 
-    std::cout << "PRN=" << PRN << " TOW=" << d_TOW << " alert_flag=" << alert_flag << " page_type= " << page_type << std::endl;
+    LOG(ERROR) << "PRN=" << PRN << " TOW=" << d_TOW << " alert_flag=" << alert_flag << " page_type= " << page_type << std::endl;
     switch(page_type)
     {
     case 10: // Ephemeris 1/2
@@ -322,7 +323,7 @@ bool Gps_CNAV_Navigation_Message::have_new_ephemeris() //Check if we have a new 
             if (ephemeris_record.d_Toe1 == ephemeris_record.d_Toe2)
                 {
                     //if all ephemeris pages have the same TOE, then they belong to the same block
-                    // std::cout << "Ephemeris (1, 2) have been received and belong to the same batch" << std::endl;
+                    // LOG(ERROR) << "Ephemeris (1, 2) have been received and belong to the same batch" << std::endl;
                     b_flag_ephemeris_1 = false;// clear the flag
                     b_flag_ephemeris_2 = false;// clear the flag
                     return true;

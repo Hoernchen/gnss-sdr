@@ -127,11 +127,11 @@ TwoBitCpxFileSignalSource::TwoBitCpxFileSignalSource(ConfigurationInterface* con
                 }
             else
                 {
-                    std::cout << "file_signal_source: Unable to open the samples file " << filename_.c_str() << std::endl;
+                    LOG(ERROR) << "file_signal_source: Unable to open the samples file " << filename_.c_str() << std::endl;
                     LOG(ERROR) << "file_signal_source: Unable to open the samples file " << filename_.c_str();
                 }
-            std::cout << std::setprecision(16);
-            std::cout << "Processing file " << filename_ << ", which contains " << (double)size << " [bytes]" << std::endl;
+            LOG(ERROR) << std::setprecision(16);
+            LOG(ERROR) << "Processing file " << filename_ << ", which contains " << (double)size << " [bytes]" << std::endl;
 
             if (size > 0)
                 {
@@ -145,7 +145,7 @@ TwoBitCpxFileSignalSource::TwoBitCpxFileSignalSource(ConfigurationInterface* con
     double signal_duration_s;
     signal_duration_s = (double)samples_ * ( 1 /(double)sampling_frequency_);
     LOG(INFO) << "Total number samples to be processed= " << samples_ << " GNSS signal duration= " << signal_duration_s << " [s]";
-    std::cout << "GNSS signal recorded time to be processed: " << signal_duration_s << " [s]" << std::endl;
+    LOG(ERROR) << "GNSS signal recorded time to be processed: " << signal_duration_s << " [s]" << std::endl;
 
     valve_ = gnss_sdr_make_valve(sizeof(gr_complex), samples_, queue_);
     DLOG(INFO) << "valve(" << valve_->unique_id() << ")";

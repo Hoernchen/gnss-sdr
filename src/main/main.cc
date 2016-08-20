@@ -102,7 +102,7 @@ int main(int argc, char** argv)
     google::SetUsageMessage(intro_help);
     google::SetVersionString(gnss_sdr_version);
     google::ParseCommandLineFlags(&argc, &argv, true);
-    std::cout << "Initializing GNSS-SDR v" << gnss_sdr_version << " ... Please wait." << std::endl;
+    LOG(ERROR) << "Initializing GNSS-SDR v" << gnss_sdr_version << " ... Please wait." << std::endl;
 
     #if CUDA_GPU_ACCEL
         // Reset the device
@@ -112,7 +112,7 @@ int main(int argc, char** argv)
         // profiled. Calling cudaDeviceReset causes all profile data to be
         // flushed before the application exits
         cudaDeviceReset();
-        std::cout << "Reset CUDA device done " << std::endl;
+        LOG(ERROR) << "Reset CUDA device done " << std::endl;
     #endif
 
     if(GOOGLE_STRIP_LOG == 0)
@@ -120,7 +120,7 @@ int main(int argc, char** argv)
             google::InitGoogleLogging(argv[0]);
             if (FLAGS_log_dir.empty())
                 {
-                    std::cout << "Logging will be done at "
+                    LOG(ERROR) << "Logging will be done at "
                               << boost::filesystem::temp_directory_path()
                               << std::endl
                               << "Use gnss-sdr --log_dir=/path/to/log to change that."
@@ -131,7 +131,7 @@ int main(int argc, char** argv)
                     const boost::filesystem::path p (FLAGS_log_dir);
                     if (!boost::filesystem::exists(p))
                         {
-                            std::cout << "The path "
+                            LOG(ERROR) << "The path "
                                       << FLAGS_log_dir
                                       << " does not exist, attempting to create it."
                                       << std::endl;
@@ -139,12 +139,12 @@ int main(int argc, char** argv)
                             boost::filesystem::create_directory(p, ec);
                             if(ec != 0)
                                 {
-                                    std::cout << "Could not create the " << FLAGS_log_dir << " folder. GNSS-SDR program ended." << std::endl;
+                                    LOG(ERROR) << "Could not create the " << FLAGS_log_dir << " folder. GNSS-SDR program ended." << std::endl;
                                     google::ShutDownCommandLineFlags();
                                     std::exit(0);
                                 }
                         }
-                    std::cout << "Logging with be done at " << FLAGS_log_dir << std::endl;
+                    LOG(ERROR) << "Logging with be done at " << FLAGS_log_dir << std::endl;
                 }
         }
 
@@ -161,11 +161,11 @@ int main(int argc, char** argv)
     }
     catch( boost::exception & e )
     {
-            LOG(FATAL) << "Boost exception: " << boost::diagnostic_information(e);
+            LOG(ERROR) << "Boost exception: " << boost::diagnostic_information(e);
     }
     catch(std::exception const&  ex)
     {
-            LOG(FATAL) << "STD exception: " << ex.what();
+            LOG(ERROR) << "STD exception: " << ex.what();
     }
     catch(...)
     {
@@ -174,11 +174,11 @@ int main(int argc, char** argv)
     // report the elapsed time
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "Total GNSS-SDR run time "
+    LOG(ERROR) << "Total GNSS-SDR run time "
               << (static_cast<double>(end - begin)) / 1000000.0
               << " [seconds]" << std::endl;
 
     google::ShutDownCommandLineFlags();
-    std::cout << "GNSS-SDR program ended." << std::endl;
+    LOG(ERROR) << "GNSS-SDR program ended." << std::endl;
     return 0;
 }

@@ -153,6 +153,6 @@ TEST_F(GalileoE5aTrackingTest, ValidationOfResults)
         end = tv.tv_sec *1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
 
-    std::cout <<  "Tracked " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Tracked " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
 }
 

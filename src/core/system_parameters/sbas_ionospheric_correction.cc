@@ -49,7 +49,7 @@ void Sbas_Ionosphere_Correction::print(std::ostream &out)
                 {
                     int igp = it_igp-it_band->d_igps.begin();
                     out << "<<I>> -IGP" <<  igp << ":";
-                    //std::cout << "  valid=" <<  it_igp->d_valid;
+                    //LOG(ERROR) << "  valid=" <<  it_igp->d_valid;
                     out << "  t0=" <<  it_igp->t0;
                     out << "  lat=" <<  it_igp->d_latitude;
                     out << "  lon=" <<  it_igp->d_longitude;

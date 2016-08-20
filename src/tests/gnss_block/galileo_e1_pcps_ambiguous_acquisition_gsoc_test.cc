@@ -240,7 +240,7 @@ TEST_F(GalileoE1PcpsAmbiguousAcquisitionGSoCTest, ConnectAndRun)
         gettimeofday(&tv, NULL);
         end = tv.tv_sec * 1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
-    std::cout <<  "Processed " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Processed " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
 }
 
 TEST_F(GalileoE1PcpsAmbiguousAcquisitionGSoCTest, ValidationOfResults)
@@ -308,7 +308,7 @@ TEST_F(GalileoE1PcpsAmbiguousAcquisitionGSoCTest, ValidationOfResults)
     stop_queue();
 
     unsigned long int nsamples = gnss_synchro.Acq_samplestamp_samples;
-    std::cout <<  "Acquired " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Acquired " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
 
     EXPECT_EQ(2, message) << "Acquisition failure. Expected message: 0=ACQ STOP.";
 

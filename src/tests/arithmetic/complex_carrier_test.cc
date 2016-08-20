@@ -61,7 +61,7 @@ TEST(ComplexCarrier_Test, StandardComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "A " << FLAGS_size_carrier_test
+    LOG(ERROR) << "A " << FLAGS_size_carrier_test
               << "-length complex carrier in standard C++ (dynamic allocation) generated in " << (end - begin)
               << " microseconds" << std::endl;
 
@@ -100,7 +100,7 @@ TEST(ComplexCarrier_Test, C11ComplexImplementation)
         }
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "A " << FLAGS_size_carrier_test
+    LOG(ERROR) << "A " << FLAGS_size_carrier_test
               << "-length complex carrier in standard C++ (declaration) generated in " << (end - begin)
               << " microseconds" << std::endl;
     ASSERT_LE(0, end - begin);
@@ -129,7 +129,7 @@ TEST(ComplexCarrier_Test, OwnComplexImplementation)
 
     gettimeofday(&tv, NULL);
     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
-    std::cout << "A " << FLAGS_size_carrier_test
+    LOG(ERROR) << "A " << FLAGS_size_carrier_test
               << "-length complex carrier using fixed point generated in " << (end - begin)
               << " microseconds" << std::endl;
 

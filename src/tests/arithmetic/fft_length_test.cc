@@ -59,7 +59,7 @@ TEST(FFT_Length_Test, MeasureExecutionTime)
                     gettimeofday(&tv, NULL);
                     long long int end = tv.tv_sec * 1000000 + tv.tv_usec;
                     execution_times[i] = static_cast<double>(end - begin) / (1000000.0 * static_cast<double>(FLAGS_fft_iterations_test));
-                    std::cout << "FFT execution time for length=" << d_fft_size << " : " << execution_times[i] << " [s]" << std::endl;
+                    LOG(ERROR) << "FFT execution time for length=" << d_fft_size << " : " << execution_times[i] << " [s]" << std::endl;
                     delete d_fft;
                 }
     );

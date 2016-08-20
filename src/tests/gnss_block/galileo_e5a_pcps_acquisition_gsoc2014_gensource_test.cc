@@ -518,7 +518,7 @@ void GalileoE5aPcpsAcquisitionGSoC2014GensourceTest::process_message()
                 doppler_error_hz = std::abs(expected_doppler_hz3 - gnss_synchro.Acq_doppler_hz);
                 break;
             default: // case 3
-                std::cout << "Error: message from unexpected acquisition channel" << std::endl;
+                LOG(ERROR) << "Error: message from unexpected acquisition channel" << std::endl;
                 break;
             }
             detection_counter++;
@@ -539,9 +539,9 @@ void GalileoE5aPcpsAcquisitionGSoC2014GensourceTest::process_message()
 
     realization_counter++;
 
-    //std::cout << correct_estimation_counter << "correct estimation counter" << std::endl;
-    std::cout << "Progress: " << round((float)realization_counter/num_of_realizations*100) << "% \r" << std::flush;
-    //std::cout << message << "message" <<std::endl;
+    //LOG(ERROR) << correct_estimation_counter << "correct estimation counter" << std::endl;
+    LOG(ERROR) << "Progress: " << round((float)realization_counter/num_of_realizations*100) << "% \r" << std::flush;
+    //LOG(ERROR) << message << "message" <<std::endl;
     if (realization_counter == num_of_realizations)
         {
             mse_delay /= num_of_realizations;
@@ -602,7 +602,7 @@ TEST_F(GalileoE5aPcpsAcquisitionGSoC2014GensourceTest, ConnectAndRun)
         end = tv.tv_sec *1e6 + tv.tv_usec;
     }) << "Failure running the top_block."<< std::endl;
 
-    std::cout <<  "Processed " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Processed " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
 }
 
 /*
@@ -749,15 +749,15 @@ TEST_F(GalileoE5aPcpsAcquisitionGSoC2014GensourceTest, ValidationOfSIM)
             stop_queue();
 
             ch_thread.join();
-            //std::cout << gnss_synchro.Acq_delay_samples << "acq delay" <<std::endl;
-            //std::cout << gnss_synchro.Acq_doppler_hz << "acq doppler" <<std::endl;
-            //std::cout << gnss_synchro.Acq_samplestamp_samples << "acq samples" <<std::endl;
+            //LOG(ERROR) << gnss_synchro.Acq_delay_samples << "acq delay" <<std::endl;
+            //LOG(ERROR) << gnss_synchro.Acq_doppler_hz << "acq doppler" <<std::endl;
+            //LOG(ERROR) << gnss_synchro.Acq_samplestamp_samples << "acq samples" <<std::endl;
             if (i == 0)
                 {
                     EXPECT_EQ(1, message) << "Acquisition failure. Expected message: 1=ACQ SUCCESS.";
                     if (message == 1)
                         {
-                            //std::cout << gnss_synchro.Acq_delay_samples << "acq delay" <<std::endl;
+                            //LOG(ERROR) << gnss_synchro.Acq_delay_samples << "acq delay" <<std::endl;
                             EXPECT_EQ((unsigned int) 1, correct_estimation_counter) << "Acquisition failure. Incorrect parameters estimation.";
                         }
 

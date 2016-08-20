@@ -292,7 +292,7 @@ bool Rtcm_Printer::Print_Message(const std::string & message)
             if(write(rtcm_dev_descriptor, message.c_str(), message.length()) == -1)
                 {
                     DLOG(INFO) << "RTCM printer cannot write on serial device" << rtcm_devname.c_str();
-                    std::cout << "RTCM printer cannot write on serial device" << rtcm_devname.c_str() << std::endl;
+                    LOG(ERROR) << "RTCM printer cannot write on serial device" << rtcm_devname.c_str() << std::endl;
                     return false;
                 }
         }

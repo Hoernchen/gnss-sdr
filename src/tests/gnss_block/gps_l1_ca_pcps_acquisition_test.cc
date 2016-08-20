@@ -191,7 +191,7 @@ TEST_F(GpsL1CaPcpsAcquisitionTest, ConnectAndRun)
         end = tv.tv_sec * 1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
 
-    std::cout <<  "Processed " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Processed " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
 }
 
 TEST_F(GpsL1CaPcpsAcquisitionTest, ValidationOfResults)
@@ -256,7 +256,7 @@ TEST_F(GpsL1CaPcpsAcquisitionTest, ValidationOfResults)
 
 
     unsigned long int nsamples = gnss_synchro.Acq_samplestamp_samples;
-    std::cout <<  "Acquired " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Acquired " << nsamples << " samples in " << (end - begin) << " microseconds" << std::endl;
 
     ASSERT_EQ(1, msg_rx->rx_message) << "Acquisition failure. Expected message: 1=ACQ SUCCESS.";
 

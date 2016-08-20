@@ -203,12 +203,12 @@ int pcps_opencl_acquisition_cc::init_opencl_environment(std::string kernel_filen
 
     if(all_platforms.size()==0)
     {
-        std::cout << "No OpenCL platforms found. Check OpenCL installation!" << std::endl;
+        LOG(ERROR) << "No OpenCL platforms found. Check OpenCL installation!" << std::endl;
         return 1;
     }
 
     d_cl_platform = all_platforms[0]; //get default platform
-    std::cout << "Using platform: " << d_cl_platform.getInfo<CL_PLATFORM_NAME>()
+    LOG(ERROR) << "Using platform: " << d_cl_platform.getInfo<CL_PLATFORM_NAME>()
               << std::endl;
 
     //get default GPU device of the default platform
@@ -217,7 +217,7 @@ int pcps_opencl_acquisition_cc::init_opencl_environment(std::string kernel_filen
 
     if(gpu_devices.size()==0)
     {
-        std::cout << "No GPU devices found. Check OpenCL installation!" << std::endl;
+        LOG(ERROR) << "No GPU devices found. Check OpenCL installation!" << std::endl;
         return 2;
     }
 
@@ -225,7 +225,7 @@ int pcps_opencl_acquisition_cc::init_opencl_environment(std::string kernel_filen
 
     std::vector<cl::Device> device;
     device.push_back(d_cl_device);
-    std::cout << "Using device: " << d_cl_device.getInfo<CL_DEVICE_NAME>() << std::endl;
+    LOG(ERROR) << "Using device: " << d_cl_device.getInfo<CL_DEVICE_NAME>() << std::endl;
 
     cl::Context context(device);
     d_cl_context = context;
@@ -236,7 +236,7 @@ int pcps_opencl_acquisition_cc::init_opencl_environment(std::string kernel_filen
         (std::istreambuf_iterator<char>()));
     kernel_file.close();
 
-    // std::cout << "Kernel code: \n" << kernel_code << std::endl;
+    // LOG(ERROR) << "Kernel code: \n" << kernel_code << std::endl;
 
     cl::Program::Sources sources;
 
@@ -245,7 +245,7 @@ int pcps_opencl_acquisition_cc::init_opencl_environment(std::string kernel_filen
     cl::Program program(context,sources);
     if(program.build(device)!=CL_SUCCESS)
     {
-        std::cout << " Error building: "
+        LOG(ERROR) << " Error building: "
                   << program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device[0])
                   << std::endl;
         return 3;
@@ -278,7 +278,7 @@ int pcps_opencl_acquisition_cc::init_opencl_environment(std::string kernel_filen
         delete d_cl_buffer_magnitude;
         delete d_cl_buffer_fft_codes;
 
-        std::cout << "Error creating OpenCL FFT plan." << std::endl;
+        LOG(ERROR) << "Error creating OpenCL FFT plan." << std::endl;
         return 4;
     }
 
@@ -647,7 +647,7 @@ void pcps_opencl_acquisition_cc::acquisition_core_opencl()
 
 //    gettimeofday(&tv, NULL);
 //    end = tv.tv_sec *1e6 + tv.tv_usec;
-//    std::cout << "Acq time = " << (end-begin) << " us" << std::endl;
+//    LOG(ERROR) << "Acq time = " << (end-begin) << " us" << std::endl;
 
     if (!d_bit_transition_flag)
         {

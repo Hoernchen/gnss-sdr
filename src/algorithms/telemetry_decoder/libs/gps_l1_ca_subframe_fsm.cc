@@ -27,7 +27,7 @@
  *
  * -------------------------------------------------------------------------
  */
-
+#include <glog/logging.h>
 #include "gps_l1_ca_subframe_fsm.h"
 #include <string>
 #include <boost/statechart/simple_state.hpp>
@@ -52,7 +52,7 @@ public:
     typedef sc::transition< Ev_gps_word_preamble, gps_subframe_fsm_S1 > reactions;
     gps_subframe_fsm_S0(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S0 "<<std::endl;
+        //LOG(ERROR)<<"Enter S0 "<<std::endl;
     }
 };
 
@@ -67,7 +67,7 @@ public:
 
     gps_subframe_fsm_S1(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S1 "<<std::endl;
+        //LOG(ERROR)<<"Enter S1 "<<std::endl;
     }
 };
 
@@ -82,7 +82,7 @@ public:
 
     gps_subframe_fsm_S2(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S2 "<<std::endl;
+        //LOG(ERROR)<<"Enter S2 "<<std::endl;
         context< GpsL1CaSubframeFsm >().gps_word_to_subframe(0);
     }
 };
@@ -98,7 +98,7 @@ public:
 
     gps_subframe_fsm_S3(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S3 "<<std::endl;
+        //LOG(ERROR)<<"Enter S3 "<<std::endl;
         context< GpsL1CaSubframeFsm >().gps_word_to_subframe(1);
     }
 };
@@ -114,7 +114,7 @@ public:
 
     gps_subframe_fsm_S4(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S4 "<<std::endl;
+        //LOG(ERROR)<<"Enter S4 "<<std::endl;
         context< GpsL1CaSubframeFsm >().gps_word_to_subframe(2);
     }
 };
@@ -130,7 +130,7 @@ public:
 
     gps_subframe_fsm_S5(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S5 "<<std::endl;
+        //LOG(ERROR)<<"Enter S5 "<<std::endl;
         context< GpsL1CaSubframeFsm >().gps_word_to_subframe(3);
     }
 };
@@ -147,7 +147,7 @@ public:
 
     gps_subframe_fsm_S6(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S6 "<<std::endl;
+        //LOG(ERROR)<<"Enter S6 "<<std::endl;
         context< GpsL1CaSubframeFsm >().gps_word_to_subframe(4);
     }
 };
@@ -162,7 +162,7 @@ public:
 
     gps_subframe_fsm_S7(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S7 "<<std::endl;
+        //LOG(ERROR)<<"Enter S7 "<<std::endl;
         context< GpsL1CaSubframeFsm >().gps_word_to_subframe(5);
     }
 };
@@ -177,7 +177,7 @@ public:
 
     gps_subframe_fsm_S8(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S8 "<<std::endl;
+        //LOG(ERROR)<<"Enter S8 "<<std::endl;
         context< GpsL1CaSubframeFsm >().gps_word_to_subframe(6);
     }
 };
@@ -193,7 +193,7 @@ public:
 
     gps_subframe_fsm_S9(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S9 "<<std::endl;
+        //LOG(ERROR)<<"Enter S9 "<<std::endl;
         context< GpsL1CaSubframeFsm >().gps_word_to_subframe(7);
     }
 };
@@ -208,7 +208,7 @@ public:
 
     gps_subframe_fsm_S10(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Enter S10 "<<std::endl;
+        //LOG(ERROR)<<"Enter S10 "<<std::endl;
         context< GpsL1CaSubframeFsm >().gps_word_to_subframe(8);
     }
 };
@@ -222,11 +222,11 @@ public:
 
     gps_subframe_fsm_S11(my_context ctx): my_base( ctx )
     {
-        //std::cout<<"Completed GPS Subframe!"<<std::endl;
+        //LOG(ERROR)<<"Completed GPS Subframe!"<<std::endl;
         context< GpsL1CaSubframeFsm >().gps_word_to_subframe(9);
         context< GpsL1CaSubframeFsm >().gps_subframe_to_nav_msg(); //decode the subframe
         // DECODE SUBFRAME
-        //std::cout<<"Enter S11"<<std::endl;
+        //LOG(ERROR)<<"Enter S11"<<std::endl;
     }
 };
 
@@ -261,7 +261,7 @@ void GpsL1CaSubframeFsm::gps_subframe_to_nav_msg()
     //int subframe_ID;
     // NEW GPS SUBFRAME HAS ARRIVED!
     d_subframe_ID = d_nav.subframe_decoder(this->d_subframe); //decode the subframe
-    std::cout << "NAV Message: received subframe "
+    LOG(ERROR) << "NAV Message: received subframe "
               << d_subframe_ID << " from satellite "
               << Gnss_Satellite(std::string("GPS"), i_satellite_PRN) << std::endl;
     d_nav.i_satellite_PRN = i_satellite_PRN;

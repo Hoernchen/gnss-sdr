@@ -236,7 +236,7 @@ double pcps_acquisition_fine_doppler_cc::search_maximum()
             if (d_grid_data[i][tmp_intex_t] > magt)
                 {
                     magt = d_grid_data[i][tmp_intex_t];
-                    //std::cout<<magt<<std::endl;
+                    //LOG(ERROR)<<magt<<std::endl;
                     index_doppler = i;
                     index_time = tmp_intex_t;
                 }
@@ -393,7 +393,7 @@ int pcps_acquisition_fine_doppler_cc::estimate_Doppler(gr_vector_const_void_star
     if (std::abs(fftFreqBins[tmp_index_freq] - d_gnss_synchro->Acq_doppler_hz) < 1000)
         {
             d_gnss_synchro->Acq_doppler_hz = static_cast<double>(fftFreqBins[tmp_index_freq]);
-            //std::cout<<"FFT maximum present at "<<fftFreqBins[tmp_index_freq]<<" [Hz]"<<std::endl;
+            //LOG(ERROR)<<"FFT maximum present at "<<fftFreqBins[tmp_index_freq]<<" [Hz]"<<std::endl;
         }
     else
         {
@@ -401,7 +401,7 @@ int pcps_acquisition_fine_doppler_cc::estimate_Doppler(gr_vector_const_void_star
             DLOG(INFO) <<  "Error estimating fine frequency Doppler";
             //debug log
             //
-            //        std::cout<<"FFT maximum present at "<<fftFreqBins[tmp_index_freq]<<" [Hz]"<<std::endl;
+            //        LOG(ERROR)<<"FFT maximum present at "<<fftFreqBins[tmp_index_freq]<<" [Hz]"<<std::endl;
             //        std::stringstream filename;
             //        std::streamsize n = sizeof(gr_complex) * (d_fft_size);
             //

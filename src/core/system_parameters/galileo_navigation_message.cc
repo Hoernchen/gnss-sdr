@@ -383,13 +383,13 @@ void Galileo_Navigation_Message::split_page(std::string page_string, int flag_ev
     //char correct_tail[7]="000000";
 
     int Page_type = 0;
-    //std::cout << "Start decoding Galileo I/NAV " << std::endl;
+    //LOG(ERROR) << "Start decoding Galileo I/NAV " << std::endl;
 
     if(page_string.at(0) == '1')// if page is odd
         {
-            //std::cout<< "page_string.at(0) split page="<<page_string.at(0) << std::endl;
+            //LOG(ERROR)<< "page_string.at(0) split page="<<page_string.at(0) << std::endl;
             std::string page_Odd = page_string;
-            //std::cout<<"Page odd string in split page"<< std::endl << page_Odd << std::endl;
+            //LOG(ERROR)<<"Page odd string in split page"<< std::endl << page_Odd << std::endl;
 
             if (flag_even_word == 1) // An odd page has been received but the previous even page is kept in memory and it is considered to join pages
                 {
@@ -400,8 +400,8 @@ void Galileo_Navigation_Message::split_page(std::string page_string, int flag_ev
                     std::string nominal = "0";
 
                     //if (Page_type_even.compare(nominal) != 0)
-                    //        std::cout << "Alert frame "<< std::endl;
-                    //else std::cout << "Nominal Page" << std::endl;
+                    //        LOG(ERROR) << "Alert frame "<< std::endl;
+                    //else LOG(ERROR) << "Nominal Page" << std::endl;
 
                     std::string Data_k = page_INAV.substr (2,112);
                     std::string Odd_bit = page_INAV.substr (114,1);
@@ -424,8 +424,8 @@ void Galileo_Navigation_Message::split_page(std::string page_string, int flag_ev
                     std::bitset<24> checksum(CRC_data);
 
                     //if (Tail_odd.compare(correct_tail) != 0)
-                    //        std::cout << "Tail odd is not correct!" << std::endl;
-                    //else std::cout<<"Tail odd is correct!"<<std::endl;
+                    //        LOG(ERROR) << "Tail odd is not correct!" << std::endl;
+                    //else LOG(ERROR)<<"Tail odd is correct!"<<std::endl;
 
                     if (CRC_test(TLM_word_for_CRC_bits, checksum.to_ulong()) == true)
                         {
@@ -449,10 +449,10 @@ void Galileo_Navigation_Message::split_page(std::string page_string, int flag_ev
         {
             page_Even = page_string.substr (0,114);
             std::string tail_Even =  page_string.substr (114,6);
-            //std::cout << "tail_even_string: " << tail_Even <<std::endl;
+            //LOG(ERROR) << "tail_even_string: " << tail_Even <<std::endl;
             //if (tail_Even.compare(correct_tail) != 0)
-            //     std::cout << "Tail even is not correct!" << std::endl;
-            //else std::cout<<"Tail even is correct!"<< std::endl;
+            //     LOG(ERROR) << "Tail even is not correct!" << std::endl;
+            //else LOG(ERROR)<<"Tail even is correct!"<< std::endl;
         }
 }
 
@@ -464,14 +464,14 @@ bool Galileo_Navigation_Message::have_new_ephemeris() //Check if we have a new e
             //if all ephemeris pages have the same IOD, then they belong to the same block
             if ((IOD_nav_1 == IOD_nav_2) and (IOD_nav_3 == IOD_nav_4) and (IOD_nav_1 == IOD_nav_3))
                 {
-                    std::cout << "Ephemeris (1, 2, 3, 4) have been received and belong to the same batch" << std::endl;
+                    LOG(ERROR) << "Ephemeris (1, 2, 3, 4) have been received and belong to the same batch" << std::endl;
                     flag_ephemeris_1 = false;// clear the flag
                     flag_ephemeris_2 = false;// clear the flag
                     flag_ephemeris_3 = false;// clear the flag
                     flag_ephemeris_4 = false;// clear the flag
                     flag_all_ephemeris = true;
                     IOD_ephemeris = IOD_nav_1;
-                    std::cout << "Batch number: "<< IOD_ephemeris << std::endl;
+                    LOG(ERROR) << "Batch number: "<< IOD_ephemeris << std::endl;
                     return true;
                 }
             else

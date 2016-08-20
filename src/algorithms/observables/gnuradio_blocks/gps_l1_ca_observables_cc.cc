@@ -235,8 +235,8 @@ int gps_l1_ca_observables_cc::general_work (int noutput_items, gr_vector_int &ni
                             arma::vec carrier_doppler_lin;
                             acc_phase_lin = coef_acc_phase[0] + coef_acc_phase[1] * desired_symbol_TOW[0];   // +coef_acc_phase[2]*desired_symbol_TOW[0]*desired_symbol_TOW[0];
                             carrier_doppler_lin = coef_doppler[0] + coef_doppler[1] * desired_symbol_TOW[0]; // +coef_doppler[2]*desired_symbol_TOW[0]*desired_symbol_TOW[0];
-                            //std::cout<<"acc_phase_vec_interp_rads="<<acc_phase_vec_interp_rads[0]<<std::endl;
-                            //std::cout<<"dopper_vec_interp_hz="<<dopper_vec_interp_hz[0]<<std::endl;
+                            //LOG(ERROR)<<"acc_phase_vec_interp_rads="<<acc_phase_vec_interp_rads[0]<<std::endl;
+                            //LOG(ERROR)<<"dopper_vec_interp_hz="<<dopper_vec_interp_hz[0]<<std::endl;
                             current_gnss_synchro[gnss_synchro_iter->second.Channel_ID].Carrier_phase_rads = acc_phase_lin[0];
                             current_gnss_synchro[gnss_synchro_iter->second.Channel_ID].Carrier_Doppler_hz = carrier_doppler_lin[0];
                         }

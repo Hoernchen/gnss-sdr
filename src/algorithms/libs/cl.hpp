@@ -96,7 +96,7 @@
  *       std::vector<cl::Platform> platforms;
  *       cl::Platform::get(&platforms);
  *       if (platforms.size() == 0) {
- *           std::cout << "Platform size 0\n";
+ *           LOG(ERROR) << "Platform size 0\n";
  *           return -1;
  *       }
  *

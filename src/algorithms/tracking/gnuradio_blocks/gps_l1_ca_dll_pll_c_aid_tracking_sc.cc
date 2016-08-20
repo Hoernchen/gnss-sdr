@@ -262,7 +262,7 @@ void gps_l1_ca_dll_pll_c_aid_tracking_sc::start_tracking()
     sys = sys_.substr(0,1);
 
     // DEBUG OUTPUT
-    std::cout << "Tracking start on channel " << d_channel << " for satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << std::endl;
+    LOG(ERROR) << "Tracking start on channel " << d_channel << " for satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << std::endl;
     LOG(INFO) << "Starting tracking of satellite " << Gnss_Satellite(systemName[sys], d_acquisition_gnss_synchro->PRN) << " on channel " << d_channel;
 
     // enable tracking
@@ -421,7 +421,7 @@ int gps_l1_ca_dll_pll_c_aid_tracking_sc::general_work (int noutput_items __attri
                         }
                     if (d_carrier_lock_fail_counter > MAXIMUM_LOCK_FAIL_COUNTER)
                         {
-                            std::cout << "Loss of lock in channel " << d_channel << "!" << std::endl;
+                            LOG(ERROR) << "Loss of lock in channel " << d_channel << "!" << std::endl;
                             LOG(INFO) << "Loss of lock in channel " << d_channel << "!";
                             this->message_port_pub(pmt::mp("events"), pmt::from_long(3));//3 -> loss of lock
                             d_carrier_lock_fail_counter = 0;

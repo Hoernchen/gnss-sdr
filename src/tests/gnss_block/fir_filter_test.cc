@@ -194,7 +194,7 @@ TEST_F(Fir_Filter_Test, ConnectAndRun)
         gettimeofday(&tv, NULL);
         end = tv.tv_sec * 1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
-    std::cout <<  "Filtered " << nsamples << " samples in " << (end-begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Filtered " << nsamples << " samples in " << (end-begin) << " microseconds" << std::endl;
 }
 
 
@@ -238,7 +238,7 @@ TEST_F(Fir_Filter_Test, ConnectAndRunGrcomplex)
         gettimeofday(&tv, NULL);
         end = tv.tv_sec * 1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
-    std::cout <<  "Filtered " << nsamples << " gr_complex samples in " << (end-begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Filtered " << nsamples << " gr_complex samples in " << (end-begin) << " microseconds" << std::endl;
 }
 
 TEST_F(Fir_Filter_Test, ConnectAndRunCshorts)
@@ -283,7 +283,7 @@ TEST_F(Fir_Filter_Test, ConnectAndRunCshorts)
         gettimeofday(&tv, NULL);
         end = tv.tv_sec * 1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
-    std::cout <<  "Filtered " << nsamples << " std::complex<int16_t> samples in " << (end-begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Filtered " << nsamples << " std::complex<int16_t> samples in " << (end-begin) << " microseconds" << std::endl;
 }
 
 
@@ -330,7 +330,7 @@ TEST_F(Fir_Filter_Test, ConnectAndRunCbytes)
         gettimeofday(&tv, NULL);
         end = tv.tv_sec * 1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
-    std::cout <<  "Filtered " << nsamples << " std::complex<int8_t> samples in " << (end-begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Filtered " << nsamples << " std::complex<int8_t> samples in " << (end-begin) << " microseconds" << std::endl;
 }
 
 
@@ -376,5 +376,5 @@ TEST_F(Fir_Filter_Test, ConnectAndRunCbyteGrcomplex)
         gettimeofday(&tv, NULL);
         end = tv.tv_sec * 1000000 + tv.tv_usec;
     }) << "Failure running the top_block." << std::endl;
-    std::cout <<  "Filtered " << nsamples << " samples in " << (end-begin) << " microseconds" << std::endl;
+    LOG(ERROR) <<  "Filtered " << nsamples << " samples in " << (end-begin) << " microseconds" << std::endl;
 }

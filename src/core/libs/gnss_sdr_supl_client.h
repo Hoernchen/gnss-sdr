@@ -162,7 +162,7 @@ public:
                                    std::map<int, Gps_Ref_Location> ref_location_map);
 
     /*
-     * Prints SUPL data to std::cout. Use it for debug purposes only.
+     * Prints SUPL data to LOG(ERROR). Use it for debug purposes only.
      */
     void print_assistance();
     gnss_sdr_supl_client();

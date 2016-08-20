@@ -114,7 +114,7 @@ FreqXlatingFirFilter::FreqXlatingFirFilter(ConfigurationInterface* configuration
     if (dump_)
         {
             DLOG(INFO) << "Dumping output into file " << dump_filename_;
-            std::cout << "Dumping output into file " << dump_filename_ << std::endl;
+            LOG(ERROR) << "Dumping output into file " << dump_filename_ << std::endl;
             file_sink_ = gr::blocks::file_sink::make(item_size, dump_filename_.c_str());
         }
 }
@@ -404,6 +404,6 @@ void FreqXlatingFirFilter::init()
     for (std::vector<double>::iterator it = taps_d.begin(); it != taps_d.end(); it++)
         {
             taps_.push_back(float(*it));
-            //std::cout<<"TAP="<<float(*it)<<std::endl;
+            //LOG(ERROR)<<"TAP="<<float(*it)<<std::endl;
         }
 }
