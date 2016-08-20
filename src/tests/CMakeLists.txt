@@ -165,7 +165,7 @@ endif(ENABLE_CUDA)
 add_definitions(-DTEST_PATH="./tests/")
 
 
-add_executable(run_tests ${CMAKE_CURRENT_SOURCE_DIR}/test_main.cc)
+add_library(run_tests SHARED ${CMAKE_CURRENT_SOURCE_DIR}/test_main.cc)
 
 add_custom_command(TARGET run_tests POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:run_tests>

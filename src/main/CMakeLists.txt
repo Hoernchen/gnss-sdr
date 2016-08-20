@@ -71,7 +71,7 @@ if(OS_IS_MACOSX)
 endif(OS_IS_MACOSX)
 
 
-add_executable(gnss-sdr ${CMAKE_CURRENT_SOURCE_DIR}/main.cc)
+add_library(gnss-sdr SHARED ${CMAKE_CURRENT_SOURCE_DIR}/main.cc)
 
 add_custom_command(TARGET gnss-sdr POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:gnss-sdr>
@@ -96,6 +96,8 @@ target_link_libraries(gnss-sdr ${MAC_LIBRARIES}
 
 install(TARGETS gnss-sdr
         RUNTIME DESTINATION bin
+		ARCHIVE DESTINATION lib${LIB_SUFFIX}
+		LIBRARY DESTINATION lib${LIB_SUFFIX}
         COMPONENT "gnss-sdr"
         )
 

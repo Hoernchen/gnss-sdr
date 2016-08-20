@@ -87,7 +87,8 @@ DECLARE_string(log_dir);
 concurrent_queue<Gps_Acq_Assist> global_gps_acq_assist_queue;
 concurrent_map<Gps_Acq_Assist> global_gps_acq_assist_map;
 
-int main(int argc, char** argv)
+int gnsssdr_app_main(int argc, char** argv) __attribute__ ((visibility ("default")));
+int gnsssdr_app_main(int argc, char** argv)
 {
     const std::string intro_help(
             std::string("\nGNSS-SDR is an Open Source GNSS Software Defined Receiver\n")

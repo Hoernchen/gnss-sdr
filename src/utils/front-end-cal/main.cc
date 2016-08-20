@@ -265,8 +265,8 @@ static time_t utc_time(int week, long tow) {
     return t;
 }
 
-
-int main(int argc, char** argv)
+int gssdr_frontendcal_main(int argc, char** argv) __attribute__ ((visibility ("default")));
+int gssdr_frontendcal_main(int argc, char** argv)
 {
     const std::string intro_help(
             std::string("\n RTL-SDR E4000 RF front-end center frequency and sampling rate calibration tool that uses GPS signals\n")

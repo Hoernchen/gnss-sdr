@@ -70,7 +70,7 @@ add_dependencies(front_end_cal_lib glog-${glog_RELEASE} armadillo-${armadillo_RE
 add_definitions( -DGNSS_SDR_VERSION="${VERSION}" )
 add_definitions( -DGNSSSDR_INSTALL_DIR="${CMAKE_INSTALL_PREFIX}" )
 
-add_executable(front-end-cal ${CMAKE_CURRENT_SOURCE_DIR}/main.cc)
+add_library(front-end-cal SHARED ${CMAKE_CURRENT_SOURCE_DIR}/main.cc)
 
 add_custom_command(TARGET front-end-cal POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:front-end-cal>
@@ -97,6 +97,8 @@ target_link_libraries(front-end-cal    ${MAC_LIBRARIES}
                                
 install(TARGETS front-end-cal
         RUNTIME DESTINATION bin
+		ARCHIVE DESTINATION lib${LIB_SUFFIX}
+		LIBRARY DESTINATION lib${LIB_SUFFIX}
         COMPONENT "front-end-cal"
 )
 
