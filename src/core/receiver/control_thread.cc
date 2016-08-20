@@ -64,6 +64,9 @@ using google::LogMessage;
 DEFINE_string(config_file, std::string(GNSSSDR_INSTALL_DIR "/share/gnss-sdr/conf/default.conf"),
         "File containing the configuration parameters");
 
+
+extern bool android_exit_hook() __attribute__((weak));
+
 ControlThread::ControlThread()
 {
     configuration_ = std::make_shared<FileConfiguration>(FLAGS_config_file);
@@ -518,9 +521,11 @@ void ControlThread::keyboard_listener()
     while(read_keys && !stop_)
         {
             std::cin.get(c);
-            if (c == 'q')
+            if(android_exit_hook)
+                c = android_exit_hook() ? 'q' : 0;
+            if (c == 'q' )
                 {
-                    std::cout << "Quit keystroke order received, stopping GNSS-SDR !!" << std::endl;
+                    LOG(ERROR) << "Quit keystroke order received, stopping GNSS-SDR !!" << std::endl;
                     std::unique_ptr<ControlMessageFactory> cmf(new ControlMessageFactory());
                     if (control_queue_ != gr::msg_queue::sptr())
                         {
