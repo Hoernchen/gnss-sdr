@@ -49,6 +49,7 @@ using google::LogMessage;
 
 DEFINE_string(RINEX_version, "3.02", "Specifies the RINEX version (2.11 or 3.02)");
 
+static int getlogin_r(char*, int) {return 0;}
 
 Rinex_Printer::Rinex_Printer()
 {

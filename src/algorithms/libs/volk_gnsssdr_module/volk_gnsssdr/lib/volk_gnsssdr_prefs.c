@@ -27,6 +27,10 @@ void volk_gnsssdr_get_config_path(char *path)
     if (!path) return;
     const char *suffix = "/.volk_gnsssdr/volk_gnsssdr_config";
     const char *suffix2 = "/volk_gnsssdr/volk_gnsssdr_config"; //non-hidden
+#ifdef ANDROID
+    strncpy(path, "/sdcard", 8);
+    strncat(path, suffix, 50);
+#else
     char *home = NULL;
 
     //allows config redirection via env variable
@@ -46,6 +50,7 @@ void volk_gnsssdr_get_config_path(char *path)
         }
     strncpy(path, home, 512);
     strcat(path, suffix);
+#endif
 }
 
 size_t volk_gnsssdr_load_preferences(volk_gnsssdr_arch_pref_t **prefs_res)

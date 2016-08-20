@@ -436,7 +436,7 @@ if(${CMAKE_VERSION} VERSION_GREATER "2.8.9")
       message(STATUS "---- Adding ASM files") # we always use ATT syntax
       message(STATUS "-- Detected neon architecture; enabling ASM")
       # setup architecture specific assembler flags
-      set(ARCH_ASM_FLAGS "-mfpu=neon -g")
+      set(ARCH_ASM_FLAGS "-march=armv7-a -mfpu=neon -g")
       # then add the files
       include_directories(${PROJECT_SOURCE_DIR}/kernels/volk_gnsssdr/asm/neon)
       file(GLOB asm_files ${PROJECT_SOURCE_DIR}/kernels/volk_gnsssdr/asm/neon/*.s)
@@ -551,7 +551,7 @@ if(CMAKE_VERSION VERSION_GREATER "2.8.7")
     else(ENABLE_STATIC_LIBS)
         add_library(volk_gnsssdr SHARED $<TARGET_OBJECTS:volk_gnsssdr_obj> ${orc})
     endif(ENABLE_STATIC_LIBS)
-    target_link_libraries(volk_gnsssdr ${volk_gnsssdr_libraries} ${Boost_LIBRARIES})
+    target_link_libraries(volk_gnsssdr ${volk_gnsssdr_libraries} ${Boost_LIBRARIES} m gcc)
 
     #Configure target properties
     set_target_properties(volk_gnsssdr_obj PROPERTIES COMPILE_FLAGS "-fPIC")
@@ -580,7 +580,7 @@ if(CMAKE_VERSION VERSION_GREATER "2.8.7")
 else()
     #create the volk_gnsssdr runtime library
     add_library(volk_gnsssdr SHARED ${volk_gnsssdr_sources})
-    target_link_libraries(volk_gnsssdr ${volk_gnsssdr_libraries})
+    target_link_libraries(volk_gnsssdr ${volk_gnsssdr_libraries} m gcc)
     set_target_properties(volk_gnsssdr PROPERTIES SOVERSION ${LIBVER})
     set_target_properties(volk_gnsssdr PROPERTIES DEFINE_SYMBOL "volk_gnsssdr_EXPORTS")
 

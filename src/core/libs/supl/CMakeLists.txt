@@ -45,7 +45,7 @@ endif(CMAKE_C_COMPILER_ID MATCHES "Clang")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MY_C_FLAGS}")
 
 add_library (supl_library STATIC ${ASN_RRLP_SOURCES} ${ASN_SUPL_SOURCES} ${SUPL_SOURCES})
-target_link_libraries (supl_library ${GNUTLS_LIBRARIES} ${GNUTLS_OPENSSL_LIBRARY} gnss_system_parameters) 
+target_link_libraries (supl_library ${GNUTLS_LIBRARIES} ${GNUTLS_OPENSSL_LIBRARY} ${GNUTLS_LIBRARIES} hogweed nettle gmp z gnss_system_parameters) 
 set_target_properties(supl_library PROPERTIES LINKER_LANGUAGE C)
 
 

@@ -290,6 +290,8 @@ endif(NOT ENABLE_GENERIC_ARCH)
 # Googletest - https://github.com/google/googletest
 ################################################################################
 enable_testing()
+set(OLDROOT ${CMAKE_FIND_ROOT_PATH})
+unset(CMAKE_FIND_ROOT_PATH)
 if(EXISTS $ENV{GTEST_DIR})
      set(GTEST_DIR $ENV{GTEST_DIR})
 endif(EXISTS $ENV{GTEST_DIR})
@@ -314,7 +316,7 @@ else(GTEST_DIR)
      endif(LIBGTEST_DEV_DIR)
 endif(GTEST_DIR)
 
-
+set(CMAKE_FIND_ROOT_PATH ${OLDROOT})
 
 ################################################################################
 # Boost - http://www.boost.org
@@ -1081,13 +1083,13 @@ if (NOT ARCH_COMPILER_FLAGS)
                set(ARCH_COMPILER_FLAGS "-march=${ARM_VERSION}")
 	        endif(ARM_VERSION STREQUAL "arm")
          else(IS_ARM)
-            set(ARCH_COMPILER_FLAGS "-march=native -mfpmath=sse")
+            #set(ARCH_COMPILER_FLAGS "-march=native -mfpmath=sse")
 	     endif(IS_ARM)
       endif(NOT ${ENABLE_GENERIC_ARCH})
     endif(OS_IS_MACOSX)
   endif(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
 endif (NOT ARCH_COMPILER_FLAGS)
-set(MY_CXX_FLAGS "${MY_CXX_FLAGS} ${ARCH_COMPILER_FLAGS}")
+set(MY_CXX_FLAGS "${MY_CXX_FLAGS} ${ARCH_COMPILER_FLAGS} -Wno-unused-parameter")
 
 if(CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
     #http://gcc.gnu.org/wiki/Visibility
@@ -1139,6 +1141,7 @@ add_custom_target(uninstall
 ########################################################################
 # Add subdirectories (in order of deps)
 ########################################################################
+link_directories(${CMAKE_INSTALL_PREFIX}/lib)
 add_subdirectory(src)
 
 if(ENABLE_PACKAGING)
